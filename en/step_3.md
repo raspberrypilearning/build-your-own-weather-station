@@ -1,3 +1,3 @@
-## Step title
+## Humidity and Temperature
 
 + Step content...

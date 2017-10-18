@@ -2,8 +2,9 @@
 
 ### Hardware
 
-+ List hardware here, or delete section.
-
++ A Raspberry Pi
++ A DHT22 temperature-humidity sensor
++ 
 ### Software
 
 + List software here, or delete section.

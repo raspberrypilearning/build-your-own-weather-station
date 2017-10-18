@@ -1,22 +1,19 @@
 ## Introduction
 
-Add project description here. What will learners be making?
+n 2016 we gave out nearly 1000 Oracle Raspberry Pi Weather Stations to schools from around the world who applied to receive these kits.
+
+The original Weather Station kit is a HAT for the Raspberry Pi which allows it to collect weather data using a variety of sensors. It is designed to be used in schools to enable students to create their own weather station, and has a range of resources to support its use.
+
+These kits have been very popular. If you're one of the many people who has been wanting to get hold of one, this guide will take you through the process of building your own. 
 
 ### What you will make
 
-Add something here to showcase here, for example:
-
-<div class="scratch-preview">
-  <iframe allowtransparency="true" width="485" height="402" src="https://scratch.mit.edu/projects/embed/160619869/?autostart=false" frameborder="0"></iframe>
-</div>
-
-Add instructions here. These should explain either how the finished project will work, or explain how to interact with the content above.
+A Weather Station for collecting local climate and environmental data.
 
 ### What you will learn
 
 This project covers elements from the following strands of the [Raspberry Pi Digital Making Curriculum](http://rpf.io/curriculum):
 
-+ [Add curriculum strand/level description.](https://www.raspberrypi.org/curriculum/strand/level)
 
 ### Additional information for educators
 
