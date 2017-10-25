@@ -7,6 +7,10 @@ The DHT22 and DHT11 sensors contain a capacitive humidity sensor and a thermisto
 ![](images/dht22_bb.png)
 
 - Connect up the sensor to your Pi as shown in the diagram above.
+- Open Idle
+
+[[[rpi-gui-idle-opening]]]
+
 - Create a new Python file and save it as `/home/pi/dht22.py`
 - Add the following lines. If you're using a DHT11, use the alternative line as shown in the code comments.
 
@@ -35,6 +39,6 @@ while True:
 python3 dht22.py
 ```
 
-- While the code is running, exhale onto the sensor and you should see the values increase. 
+- While the code is running, exhale onto the sensor and you should see the values increase.
 
 ![](images/dht22_code_run.png)

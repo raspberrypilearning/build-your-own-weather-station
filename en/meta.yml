@@ -14,3 +14,7 @@ steps:
   - title: Introduction
   - title: What you will need
   - title: Humidity & temperature
+  - title: Barometric Pressure
+  - title: Air Quality
+  - title: Active mechanical sensors
+  - title: Wind speed

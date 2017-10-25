@@ -15,6 +15,7 @@ The specific sensors here are chosen after considering a number of factors:
 + A DHT22 or DHT11 temperature-humidity sensor.
 + A 4.7 K Ohm resistor.
 + A breadboard and jumper wires
++ [An anemometer, wind vane and rain gauge](https://www.argentdata.com/catalog/product_info.php?products_id=145){:target="_blank"}
 
 ### Software
 
