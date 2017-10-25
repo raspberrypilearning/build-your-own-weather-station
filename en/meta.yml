@@ -2,7 +2,7 @@ title: build-your-own-weather-station
 hero_image: images/banner.png
 description: build-your-own-weather-station description
 theme: red # possible values: blue, green, navy, orange, red, turquoise, violet, yellow
-duration: 2 # possible values: 1, 2 or 3
+duration: 3 # possible values: 1, 2 or 3
 listed: false
 ingredient: false
 copyedit: false
@@ -18,3 +18,7 @@ steps:
   - title: Air Quality
   - title: Active mechanical sensors
   - title: Wind speed
+  - title: Wind gusts
+  - title: Wind direction
+  - title: Rainfall
+  - title: Fully functional weather station

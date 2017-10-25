@@ -1,6 +1,6 @@
 ## Wind speed
 
-A typical anemometer will have three arms with scoops on the end which "catch" the wind and cause the arms to spin. If you were to dismantle one of the common anemometers used by the original Oracle Weather station, you would find a small magnet attached to the underside.  
+A typical anemometer will have three arms with scoops on the end which "catch" the wind and cause the arms to spin. If you were to dismantle one of the anemometers used by the original Oracle Weather station, you would find a small magnet attached to the underside.  
 
 https://www.argentdata.com/files/80422_datasheet.pdf
 
@@ -12,7 +12,7 @@ At two points within the magnet's rotation, it triggers a reed switch which prod
 
 There are many ways of doing this with Python. One approach is to treat the sensor like a Button and then use the `gpiozero` library to count the number of times it has been 'pressed'.
 
-- The consumer anemometers normally have two wires. Connect one to a ground pin and the other to GPIO14.
+- Consumer anemometers normally have two wires. Connect one to a ground pin and the other to GPIO14.
 - Open Idle and create a new Python file and save it as `/home/pi/wind.py`
 - Add the lines below to use gpiozero's Button functions and set up a Button on pin 14. Also create a variable called `count` to store the number of rotations.
 
@@ -34,23 +34,23 @@ def spin():
 wind_speed_sensor.when_pressed = spin
 ```
 
-- Save and run your code. Manually turn the arms of the anemometer and you should see your code being triggered and the count variable incrementing in the Python shell twice very rotation.
+- Save and run your code. Manually turn the arms of the anemometer and you should see in the Python shell your code being triggered and the count variable incrementing  twice very rotation.
 
 ![](images/wind-idle.png)
 
-Now you can count the signals from the anemometer; you can use this data to calculate the wind speed.
+Now you can count the signals from the anemometer, you can use this data to calculate the wind speed.
 
 ### Calculating wind speed
 
 The anemometer produces two signals per spin, so you can count the number of full rotations of the sensor by halving the number of detected inputs. This can then be used to calculate wind speed:
 
-    **speed = distance / time**
+speed = distance / time
 
-To calculate **speed** you need to know the **distance** travelled in a certain amount of **time**. Measuring time is fairly straightforward as you can count the number of signals over the course of a fixed time period, for example 5 seconds.
+To calculate **speed** you need to know the **distance** travelled in a certain amount of **time**. Measuring time is fairly straightforward and you can count the number of signals over the course of a fixed time period, for example 5 seconds.
 
-The distance travelled by one of the cups will be equal to the number of rotations * the distance around the edge of the circle (circumference):
+The distance travelled by one of the cups will be equal to the number of rotations multiplied by the distance around the edge of the circle (circumference):
 
-    **speed = (rotations * circumference) / time**
+**speed = (rotations * circumference) / time**
 
 The circumference can be calculated as long as you know either the **radius** or **diameter** of the circle.
 
@@ -58,11 +58,11 @@ The circumference can be calculated as long as you know either the **radius** or
 
 You can discover the radius of the circle made by the anemometer by measuring the distance from the centre to the edge of one of the cups. Knowing the radius, you can find the circumference with the formula `2 * pi * radius`. Don't forget that a whole rotation generates two signals, so if you'll need to halve the number of signals detected:
 
-    **speed = ( (signals/2) * (2 * pi * radius) ) / time**
+**speed = ( (signals/2) * (2 * pi * radius) ) / time**
 
-The radius for the common anemometers used by the original Oracle Weather station is 9.0cm and that is the figure that will be used in the code examples that follow. Don't forget to change this value if your anemometer has different dimensions.
+The radius for the recommended anemometers used by the original Oracle Weather station is 9.0cm and that is the figure that will be used in the code examples that follow. Don't forget to change this value if your anemometer has different dimensions.
 
-To implement this formula in Python we can use the `math` library. So if you measured 17 signals from our anemometer in 5 seconds, your speed could be calculated like this:
+To implement this formula in Python we can use the `math` library. So if you measured 17 signals from your anemometer in 5 seconds, your speed could be calculated like this:
 
 ```python
 import math
@@ -79,7 +79,7 @@ speed = dist_cm / interval
 print(speed)
 ```
 
-- Now use this formula should to modify your `wind.py` code so that it also calculates the speed of the wind in cm/s.
+- Now use this formula to modify your `wind.py` code so that it also calculates the speed of the wind in cm/s.
 
 ---hints---
 ---hint---
@@ -195,7 +195,7 @@ def calculate_speed(interval):
 
 ### Calibration
 
-Most anemometers will have a specification that includes calibration data to help you test the accuracy of your sensor. The [datasheet](https://www.argentdata.com/files/80422_datasheet.pdf){:target="_blank"} for the recommended anemometers says that one rotation a second that should equate to 2.4 km/h. So in the example interval of 5 seconds, 5 spins (10 signals) should equal the same 2.4 km/h.
+Most anemometers will have a specification that includes calibration data to help you test the accuracy of your sensor. The [datasheet](https://www.argentdata.com/files/80422_datasheet.pdf){:target="_blank"} for the recommended anemometers says that one rotation a second should equate to 2.4 km/h. So in the example interval of 5 seconds, 5 spins (10 signals) should equal the same 2.4 km/h.
 
 - Run your program and spin the anemometer 5 times within the first 5 seconds. What wind speed value is reported?
 
@@ -205,7 +205,7 @@ You'll probably find that the value doesn't match the specification. This loss o
 
 For the recommended anemometers this factor equals 1.18.
 
--  Update the final line in your calculate_speed function to multiply your speed in km/h by 1.18.
+-  Update the final line in your `calculate_speed` function to multiply your speed in km/h by 1.18.
 
 ---hints---
 ---hint---
