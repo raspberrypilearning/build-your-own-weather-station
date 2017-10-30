@@ -1,10 +1,10 @@
 ## Introduction
 
-n 2016 we gave out nearly 1000 Oracle Raspberry Pi Weather Stations to schools from around the world who applied to receive these kits.
+In 2016 we gave out nearly 1000 Oracle Raspberry Pi Weather Stations to schools from around the world who applied to receive these kits.
 
 The original Weather Station kit is a HAT for the Raspberry Pi which allows it to collect weather data using a variety of sensors. It is designed to be used in schools to enable students to create their own weather station, and has a range of resources to support its use.
 
-These kits have been very popular. If you're one of the many people who has been wanting to get hold of one, this guide will take you through the process of building your own. 
+These kits have been very popular. If you're one of the many people who has been wanting to get hold of one, this guide will take you through the process of building your own.
 
 ### What you will make
 

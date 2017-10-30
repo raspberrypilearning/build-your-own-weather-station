@@ -1,44 +1,94 @@
 ## Humidity and Temperature
 
-The DHT22 and DHT11 sensors contain a capacitive humidity sensor and a thermistor in one physical package. The DHT22 is more accurate but slower at reporting readings than the DHT11 and therefore the recommended choice. However a DHT11 will work perfectly well as long as you modify your code as shown in the examples below.
+The HTU21D-F sensor is a digital humidity sensor that can also measure temperature. The Adafruit breakout board also incorporates a PTFE membrane to protect the sensor ffrom dust and provides an i2c interface.
 
 ### Wiring up the sensor.
 
-![](images/dht22_bb.png)
+![](images/htu21d_bb.png)
 
 - Connect up the sensor to your Pi as shown in the diagram above.
+
+| Pi GPIO  |HTU21D  |
+|-------|----------|
+| 2 (5v) | Vin |
+| 6 (Gnd) | Gnd|
+| 3 (SDA) | SDA |
+| 5 (SCL) | SCL|
+
+The 3v3 connection on the HTU21D-F is not used.
+
+
 - Open Idle
 
 [[[rpi-gui-idle-opening]]]
 
-- Create a new Python file and save it as `/home/pi/dht22.py`
-- Add the following lines. If you're using a DHT11, use the alternative line as shown in the code comments.
+- Create a new Python file and save it as `/home/pi/weather-station/humtemp.py`
 
 ```python
-import Adafruit_DHT
+import HTU21D
 from time import sleep
 
-DHT22_pin = 21
-humidity_sensor = Adafruit_DHT.DHT22 # DHT22 sensor
-# humidity_sensor = Adafruit_DHT.DHT11 # DHT11 sensor
-
-def read_dht22(pin):
-    humidity, ambient_temperature = Adafruit_DHT.read_retry(humidity_sensor,pin)
-    while humidity is None or ambient_temperature is None:
-        humidity, ambient_temperature = Adafruit_DHT.read_retry(humidity_sensor,pin)
-        time.sleep(0.1)
-    return humidity, ambient_temperature
+htu21d_sensor = HTU21D.HTU21D()
 
 while True:
-    print(read_dht22(DHT22_pin))
+    humidity  = htu21d_sensor.read_humidity()
+    ambient_temperature = htu21d_sensor.read_temperature()
+    print(humidity, temperature)
     sleep(0.5)
 ```
-- Now test the code by opening a terminal window and running:
+- Now test the code.
+
+- While the code is running, exhale onto the sensor and you should see the values increase. When you've finished testing, terminate the code by typing cntrl+c in the Python shell.
+
+![](images/humtemp_code_run.png)
+
+The HTU21D-F will report the air temperature, but this can be significantly warmer than the ground. A thermal probe stuck into the soil is a useful supplemental temperature measurement and can be useful to indicate the presence of ice in winter.  The Dallas DS18B20 temperature sensor comes in many forms including a waterproof thermal probe version and this is the sensor used on the Oracle Weather Station.
+
+- Normally the DS18B20 comes with 3 bare wires so the easiest way to prototype and test the sensor is using PCB mount screw terminal blocks which can also be plugged into breadboards. Connect your DS18B20 as shown in the circuit diagram below.  
+
+![](images/ds18b20_bb.png)
+
+- Edit the file /boot/config:
 
 ```bash
-python3 dht22.py
+sudo nano /boot/config.txt
+```
+ - Add the line below at the bottom of the file:
+
+ ```bash
+ dtoverlay=w1-gpio
+ ```
+![](images/ds18b20_config.png)
+
+- Then edit /etc/modules
+
+```bash
+sudo nano /etc/modules
 ```
 
-- While the code is running, exhale onto the sensor and you should see the values increase.
+- Add the lines below at the bottom of the file:
 
-![](images/dht22_code_run.png)
+```bash
+w1-gpio
+w1-therm
+```
+![](images/ds18b20_modules.png)
+
+- Reboot the Raspberry Pi
+
+- Open the file /home/pi/weather-station/ds18b20_therm.py in Idle and run it. You should see the temperature printed out in the Python Shell window.  
+
+![](images/ds18b20_run.png)
+
+- Put the probe into a glass of cold water and re-run the program. the new temperature reported should be lower (unless you were working in a very cold room in the first place).
+
+### Troubleshooting
+
+- If your are unable to take readings from the DS18B20, check that the wires from the probe are securely connected to the screw terminals and that you have modified the `/etc/modules` and `/boot/config.txt` correctly. If you open a Terminal window and type:
+
+```bash
+ls /sys/bus/w1/devices/
+```
+You should see two files listed. If these are not shown then recheck your wiring.
+
+![](images/ds18b20_ls.png)

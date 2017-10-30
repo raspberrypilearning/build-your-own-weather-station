@@ -12,22 +12,20 @@ The specific sensors here are chosen after considering a number of factors:
 ### Hardware
 
 + A Raspberry Pi.
-+ A DHT22 or DHT11 temperature-humidity sensor.
++ An Adafruit HTU21D temperature-humidity sensor.
++ DS18B20 digital thermal probe (with 1m lead)
 + A 4.7 K Ohm resistor.
++ Some 5mm pitch PCB mount screw terminal blocks
 + A breadboard and jumper wires
 + [An anemometer, wind vane and rain gauge](https://www.argentdata.com/catalog/product_info.php?products_id=145){:target="_blank"}
 
 ### Software
 
-+ Adafruit DHT11/22 Python library
-
-``bash
-git clone https://github.com/adafruit/Adafruit_Python_DHT.github
-cd Adafruit_Python_DHT
-python3 setup.py install
++ The Oracle Raspberry Pi Weather Station Software
+```bash
+git clone https://github.com/RaspberryPiFoundation/weather-station
 ```
 
-+ List software here, or delete section.
 
 ### Additional Resources
 
