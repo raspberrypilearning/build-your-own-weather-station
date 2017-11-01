@@ -7,3 +7,8 @@ The original Oracle Weather Station kit used popular [wind and rain sensors] (ht
 ### Connectors
 
 These sensors usually come with RJ11 connectors (they look like a standard telephone jack) which are sturdy and are difficult to accidentally dislodge so your Weather Station will remain operational even in blustery conditions.
+
+When it comes to connecting them to your Pi, you have three options:
+- Chop off the RJ11 connectors and connect the wires using screw terminals or by soldering.
+- Use RJ11 breakout boards - these can be helpful for prototyping
+- Use RJ11 connectors
