@@ -234,4 +234,5 @@ def calculate_speed(time_sec):
 ---/hint---
 ---/hints---
 
+- You'll need to alter the final `print` line of your code so that it now shows the output in the correct units. 
 - Re-run the code and this time you should get a value closer to 2.4.
