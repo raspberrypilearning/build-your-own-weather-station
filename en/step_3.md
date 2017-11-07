@@ -1,21 +1,21 @@
-## Humidity and Temperature
+## Humidity, Temperature and pressure
 
-The HTU21D-F sensor is a digital humidity sensor that can also measure temperature. The Adafruit breakout board also incorporates a PTFE membrane to protect the sensor ffrom dust and provides an i2c interface.
+The BME280 sensor is a digital sensor that can measure temperature, humidity and atmospheric pressure. It is available in a number of breakout boards from popular manufacturers such as Adafruit and Sparkfun. This guide assumes you have the Adafruit package, but the instructions should be applicable to most versions.
 
 ### Wiring up the sensor.
 
-![](images/htu21d_bb.png)
+![](images/bme280_bb.png)
 
 - Connect up the sensor to your Pi as shown in the diagram above.
 
-| Pi GPIO  |HTU21D  |
+| Pi GPIO  |BME280  |
 |-------|----------|
-| 2 (5v) | Vin |
+| 17 (3v3) | Vin |
 | 6 (Gnd) | Gnd|
-| 3 (SDA) | SDA |
-| 5 (SCL) | SCL|
+| 3 (SDA) | SDA (SDI) |
+| 5 (SCL) | SCL (SCK)|
 
-The 3v3 connection on the HTU21D-F is not used.
+Some breakout boards may have other pins (such as SDO or CSB) but these are not generally needed.
 
 
 - Open Idle
@@ -25,24 +25,32 @@ The 3v3 connection on the HTU21D-F is not used.
 - Create a new Python file and save it as `/home/pi/weather-station/humtemp.py`
 
 ```python
-import HTU21D
+import bme280
+import smbus2
 from time import sleep
 
-htu21d_sensor = HTU21D.HTU21D()
+port = 1
+address = 0x76
+bus = smbus2.SMBus(port)
+
+bme280.load_calibration_params(bus,address)
+
 
 while True:
-    humidity  = htu21d_sensor.read_humidity()
-    ambient_temperature = htu21d_sensor.read_temperature()
-    print(humidity, temperature)
-    sleep(0.5)
+    bme280_data = bme280.sample(bus,address)
+    humidity  = bme280_data.humidity
+    pressure  = bme280_data.pressure
+    ambient_temperature = bme280_data.emperature
+    print(humidity, pressure, temperature)
+    sleep(1)
 ```
 - Now test the code.
 
 - While the code is running, exhale onto the sensor and you should see the values increase. When you've finished testing, terminate the code by typing cntrl+c in the Python shell.
 
-![](images/humtemp_code_run.png)
+![](images/bme280_code_run.png)
 
-The HTU21D-F will report the air temperature, but this can be significantly warmer than the ground. A thermal probe stuck into the soil is a useful supplemental temperature measurement and can be useful to indicate the presence of ice in winter.  The Dallas DS18B20 temperature sensor comes in many forms including a waterproof thermal probe version and this is the sensor used on the Oracle Weather Station.
+The BME280 will report the air temperature, but this can be significantly warmer than the ground. A thermal probe stuck into the soil is a useful supplemental temperature measurement and can be useful to indicate the presence of ice in winter.  The Dallas DS18B20 temperature sensor comes in many forms including a waterproof thermal probe version and this is the sensor used on the Oracle Weather Station.
 
 - Normally the DS18B20 comes with 3 bare wires so the easiest way to prototype and test the sensor is using PCB mount screw terminal blocks which can also be plugged into breadboards. Connect your DS18B20 as shown in the circuit diagram below.  
 

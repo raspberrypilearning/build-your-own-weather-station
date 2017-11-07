@@ -1,1 +1,0 @@
-## Fully functional weather station

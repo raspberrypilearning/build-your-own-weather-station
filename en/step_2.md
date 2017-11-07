@@ -12,13 +12,14 @@ The specific sensors here are chosen after considering a number of factors:
 ### Hardware
 
 + A Raspberry Pi.
-+ An Adafruit HTU21D temperature-humidity sensor.
++ A BME280 pressure, temperature and humidity sensor.
 + DS18B20 digital thermal probe (with 1m lead)
 + A 4.7 K Ohm resistor.
 + Some 5mm pitch PCB mount screw terminal blocks
 + A breadboard and jumper wires
 + [An anemometer, wind vane and rain gauge](https://www.argentdata.com/catalog/product_info.php?products_id=145){:target="_blank"}
 + An RJ11 breakout board (optional)
+
 ### Software
 
 + The Oracle Raspberry Pi Weather Station Software. Install this by opening a Terminal window and typing:
@@ -26,6 +27,10 @@ The specific sensors here are chosen after considering a number of factors:
 git clone https://github.com/RaspberryPiFoundation/weather-station
 ```
 
++ The BME290 Python library:
+```bash
+sudo pip3 install RPi.bme280
+```
 
 ### Additional Resources
 
