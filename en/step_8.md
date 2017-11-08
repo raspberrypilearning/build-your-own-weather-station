@@ -18,7 +18,7 @@ In order to read the wind direction from the vane, you'll need to be able to mea
 
 Instead of measuring the resistance value directly, it is actually much easier to record a voltage from the wind vane which varies according to which combination of resistors is currently being switched into the circuit. This is an *analogue* signal because it continuously reports a **range** of voltages. Compare this to the anemometer which simply reported a `HIGH` or `LOW` voltage, all or nothing, which is a *digital* signal.
 
-[[[generic-analogue-digital]]]
+[[[generic-theory-analogue-digital]]]
 
 ### Measuring analogue voltages with a Raspberry Pi
 
