@@ -13,7 +13,7 @@ The specific sensors here are chosen after considering a number of factors:
 
 + A Raspberry Pi.
 + A BME280 pressure, temperature and humidity sensor.
-+ DS18B20 digital thermal probe (with 1m lead)
++ A DS18B20 digital thermal probe (with 1m lead)
 + A 4.7 K Ohm resistor.
 + Some 5mm pitch PCB mount screw terminal blocks
 + A breadboard and jumper wires
@@ -27,7 +27,7 @@ The specific sensors here are chosen after considering a number of factors:
 git clone https://github.com/RaspberryPiFoundation/weather-station
 ```
 
-+ The BME290 Python library:
++ The BME280 Python library:
 ```bash
 sudo pip3 install RPi.bme280
 ```
