@@ -1,14 +1,14 @@
 # Wind direction
 
-A wind vane shows the direction from which the wind is coming, not where it's going; this can be confusing because TV weather maps show the opposite. It works by the wind exerting force on a vertical blade which rotates to find the position of least resistance; this position is then aligned with the direction of the oncoming wind.
+A wind vane shows the direction from which the wind is coming, not where it's going; this can be confusing because the arrows on TV weather maps show the opposite. It works by the wind exerting force on a vertical blade which rotates to find the position of least resistance; this position is then aligned with the direction of the oncoming wind.
 
-The wind vane is more complex than the rain gauge or anemometer. It does use reed switches and magnets, but it works in a completely different way.
+The wind vane is more complex than the rain gauge or anemometer. It does use reed switches and a rotating magnet, but it works in a completely different way.
 
 If you look inside the recommended wind vane, you'll see there are eight reed switches arranged like the spokes of a wheel.
 
 ![](images/wind_vane_reed.png)
 
-There are also eight resistors in the wind vane, and as the magnet rotates, different reed switches will open and close and thus switch their corresponding resistor in and out of the circuit. Resistors are small components that resist/reduce the flow of electrical current but don't stop it; at the same time they also reduce the voltage moving through the circuit. Resistors can have different values; a low resistance value would let almost all voltage/current through, but a high resistance value would let very little through.
+There are also eight resistors in the wind vane, and as the magnet rotates, different reed switches will open and close and thus switch their corresponding resistor in and out of the circuit. Resistors are small components that resist/reduce the flow of electrical current but don't stop it.  Resistors can have different values; a low resistance value would let almost all current through, but a high resistance value would let very little through. The most common uses for resistors are to protect components from being damaged by too high a current, and to divide the voltage between different parts of a circuit.
 
 Each of the eight resistors have different values which you should see printed in white text next to them (e.g. you can see 8.2K on the right). This allows the wind vane to have 16 possible combinations of resistance, since the magnet is able to close two reed switches when halfway between them. More information can be found in the [datasheet](https://www.argentdata.com/files/80422_datasheet.pdf).
 
@@ -35,8 +35,7 @@ from gpiozero import MCP3008
 adc = MCP3008(channel=0)
 voltage = adc.value * 3.3
 ```
-
-You may have noticed that the second page of the wind vane datasheet contains a circuit diagram and table that lists angle, resistance and voltage.
+Now you can measure a changing analog signal using the MCP3008, we can use another clever circuit to produce a voltage that varies with the resistance of the wind vane.
 
 ### Using a voltage divider
 
@@ -48,13 +47,47 @@ In the circuit above, Vout can be calculated using the formula:
 
 Vout = Vin * R2/R1 +R2
 
-So by varying the values of R1 and R2, you can reduce the input voltage Vin down to the output voltage Vout
+So by varying the values of R1 and R2, you can reduce the input voltage Vin down to the output voltage Vout.
 
-Now if you imagine that R2 is actually some kind of variable resistor (a light dependent resistor for example), then by measuring Vout, we can calculate R2 as long as we know R1.
+- You'll need to use this formula so create a new Python program called `voltage-divider.py` that contains a function *voltage_divider* that calculates Vout for a given set of R1,R2 and Vin.
 
-You may have noticed that the second page of the wind vane datasheet contains a voltage divider circuit diagram and table that lists angle, resistance and voltage. However, the logic levels on a Raspberry Pi are 3.3v so these figures will need adjusting.
+---hints---
+---hint---
+To start off, create function definition that takes the 3 input values:
 
-- Using the list of resistances used in the wind vane, write a small Python program called `vane_values.py` to calculate the new values for a 3.3v Vin with a R1 resistor of 10K.
+```python
+def voltage_divider(R1, R2, Vin):
+```
+---/hint---
+---hint---
+
+Then add the formula.
+
+```python
+vout = (vin* r1)/(r1+r2)
+
+```
+---/hint---
+---hint---
+
+Finally, include the return statement. To make things easier to read, round the answer to 2 decimal places.
+```python
+def voltage_divider(r1,r2,vin):
+    vout = (vin* r1)/(r1+r2)
+    return round(vout,3)
+```
+---/hint---
+---/hints---
+
+- Test you function to make sure it provides the right answer for a selection of input values. For example, when R1 = 33K, R2 = 10K and a reference voltage of 5v, the function should return an answer of 3.837v
+
+Now returning to the circuit, if you imagine that R2 is actually some kind of variable resistor (a light dependent resistor for example), then by measuring Vout, we can calculate R2 as long as we know R1. In this case, the wind vane acts like a variable resistor and so you can use a voltage divider circuit to measure its resistance value at any given time.
+
+First of all, you need to find the best value for R1 to use.
+
+You may have noticed that the second page of the wind vane datasheet contains a voltage divider circuit diagram and a table that lists angle, resistance and voltage. The value quoted for R1 in this diagram is 10K. However, the logic levels on a Raspberry Pi are 3.3v so these figures are not quite right for what you need.
+
+- Using the list of resistances used in the wind vane and the voltage divider formula, write a small Python program called `vane_values.py` to calculate the new values for a 3.3v Vin with a R1 resistor of 10K.
 
 
 ---hints---
@@ -67,21 +100,18 @@ resistances = [33000, 6570, 8200, 891,
                3900, 3140, 16000, 14120,
                120000, 42120, 64900, 21880]
 ```
-Then loop through this list, calculating the output voltage for each value.
+Then loop through this list, calculating the output voltage for each value. You can use the `voltage_divider` function you wrote earlier for this part.  
 ---/hint---
 ---hint---
 
 To loop through the list, printing each value out you could use the code:
 
 ```python
-resistances = [33000, 6570, 8200, 891,
-               1000, 688, 2200, 1410,
-               3900, 3140, 16000, 14120,
-               120000, 42120, 64900, 21880]
+
 for x in range(len(resistances)):
     print(resistance[x])
 ```
-This can be expanded to include the calculation too.
+This can then be expanded to include the calculation too.
 ---/hint---
 ---hint---
 
@@ -91,22 +121,28 @@ resistances = [33000, 6570, 8200, 891,
                1000, 688, 2200, 1410,
                3900, 3140, 16000, 14120,
                120000, 42120, 64900, 21880]
+
+def voltage_divider(r1,r2,vin):
+    vout = (vin* r1)/(r1+r2)
+    return round(vout,3)
+
 for x in range(len(resistances)):
-    print(resistances[x],round((3.3*resistances[x])/(resistances[x]+10000),3))
+    print(resistances[x],voltage_divider(10000,resistances[x],3.3))
 ```
 ---/hint---
 ---/hints---
 
-Using a value of R1 = 10K works well when the reference voltage is 5v, but you'll probably see that some of the possible voltages are quite close together. By using a smaller value for R1, you can optimise the separation between the different voltages that correspond to the resistance values produced by the vane.
+Using the value of R1 = 10K works well when the reference voltage is 5v, but you'll probably see that some of the possible voltages are quite close together when using 3.3v. By using a smaller value for R1, you can optimise the separation between the different voltages that correspond to the resistance values produced by the vane.
 
-Modify your `vane_values.py` code to test alternative values for R1. Remember that only certain standard resistance values are available. The most common in the range you'll need are: 1K, 1.2K, 1.5K, 1.8K, 2.2K. 2.7K, 3.3K, 4.7K, 5.6K, 6.8k, 8.2K.
+Use your `vane_values.py` code to test alternative values for R1. Remember that only certain standard resistance values are available. The most common in the range you'll need are: 1K, 1.2K, 1.5K, 1.8K, 2.2K. 2.7K, 3.3K, 4.7K, 5.6K, 6.8k, 8.2K.
 
+You should find that 4.7K is a good value.
 
 - Now you know the value for R1 in the voltage divider circuit, you can wire everything up to your ADC and the Pi.
 
 ![](images/MCP3008_vane_bb.png)
 
-- Test that your circuit is able to discriminate between the various angular positions of the wind vane. Create a small python program called `vane_test.py` to record the different values produced by your circuit when the vane is rotated.  
+- Test that your circuit is able to discriminate between the various angular positions of the wind vane. Create a small python program called `vane_test.py` to count the different values produced by your circuit when the vane is rotated.  
 
 ---hints---
 ---hint---
@@ -141,6 +177,57 @@ while True:
         values.append(wind)
         count+=1
         print(count)
+```
+---/hint---
+---/hints---
+
+- Run your code while rotating the wind vane.  Your should see the number of unique voltages seen so far printed out in the Python shell.
+
+![](images/MCP3008_vane_test1.png)
+
+- You will also see some red text warning about SPISoftwareFallback. To make this error not appear in future, click on the Raspberry menu button and select *Preferences -> Raspberry Pi Configuration*. Then enable SPI under the interfaces tab.
+
+![](images/MCP3008_vane_test2.png)
+
+-If everything was 100% accurate to a very high level of precision then the count should go no higher than 16. However because the ADC may record a rising or falling voltage, you may be able to generate a few more values.  
+
+![](images/MCP3008_vane_test3.png)
+
+- Modify your code to include a list of the possible correct values and check each reading from the ADC against this list. Have your code print a helpful message for each reading.
+
+---hints---
+---hint---
+Add a list of possible values, all rounded to 1 decimal place. You can use your `voltage_divider` code to produce this list.
+
+```Python
+volts = [0.4, 1.4, 1.2, 2.8,
+         2.9, 2.2, 2.5, 1.8,
+         2.0, 0.7, 0.8, 0.1,
+         0.3, 0.2, 0.6, 2.7]
+```
+
+---/hint---
+---hint---
+
+Then use an `if...else` conditional statement to test if the value from the ADC is in the `volts` list.
+---/hint---
+---hint---
+
+A complete solution is:
+```Python
+from gpiozero import MCP3008
+adc = MCP3008(channel=0)
+count = 0
+volts = [0.4, 1.4, 1.2, 2.8,
+         2.9, 2.2, 2.5, 1.8,
+         2.0, 0.7, 0.8, 0.1,
+         0.3, 0.2, 0.6, 2.7]
+while True:
+    wind =round(adc.value*3.3,1)
+    if not wind in volts:
+        print('Unknown value: ' + str(wind))
+    else:
+        print('Match: ' + str(wind))
 ```
 ---/hint---
 ---/hints---
