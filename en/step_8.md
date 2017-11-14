@@ -51,7 +51,7 @@ Vout = Vin * R2/R1 +R2
 
 So by varying the values of R1 and R2, you can reduce the input voltage Vin down to the output voltage Vout.
 
--  Use this formula so create a new Python program called `voltage-divider.py` that contains a function *voltage_divider* that calculates Vout for a given set of R1,R2 and Vin.
+-  Use this formula to create a new Python program called `voltage-divider.py` that contains a function *voltage_divider* that calculates Vout for a given set of R1,R2 and Vin.
 
 ---hints---
 ---hint---

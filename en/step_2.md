@@ -14,11 +14,12 @@ The specific sensors here are chosen after considering a number of factors:
 + A Raspberry Pi.
 + A BME280 pressure, temperature and humidity sensor.
 + A DS18B20 digital thermal probe (with 1m lead)
-+ A 4.7 K Ohm resistor.
++ Two 4.7 K Ohm resistors.
 + Some 5mm pitch PCB mount screw terminal blocks
 + A breadboard and jumper wires
 + [An anemometer, wind vane and rain gauge](https://www.argentdata.com/catalog/product_info.php?products_id=145){:target="_blank"}
 + An RJ11 breakout board (optional)
++ An MCP3008 Analogue to digital Convertor Integrated Circuit.
 
 ### Software
 
