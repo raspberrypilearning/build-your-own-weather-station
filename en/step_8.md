@@ -255,12 +255,12 @@ Use the `voltage_divider` function to print the voltages and their corresponding
 Your dictionary should look like this:
 ```python
 volts = {0.4: 3300,
-         1.4:6570,
-         1.2:8200,
-         2.8:891,
-         2.7:1000,
-         2.9:688,
-         2.2:2200,
+         1.4: 6570,
+         1.2: 8200,
+         2.8: 891,
+         2.7: 1000,
+         2.9: 688,
+         2.2: 2200,
          2.5: 1410,
          1.8: 3900,
          2.0: 3140,

@@ -29,6 +29,8 @@ The top of the back wall does come off if you want to see inside; just pull on t
 
 When connected, the Weather Station rain gauge uses **GPIO pin 6** (BCM), so if you're using a rain gauge bought separately connect it to GPIO pin 6 for the code below to work.
 
+![](images/rainfall_bb.png)
+
 ## Sample code
 
 The following program detects input from the rain gauge and converts it to a meaningful measurement which is displayed on screen:

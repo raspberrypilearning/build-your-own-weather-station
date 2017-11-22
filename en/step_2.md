@@ -9,6 +9,8 @@ The specific sensors here are chosen after considering a number of factors:
 - Reliability
 - Accuracy
 
+First of all you will develop and build a prototype weather station using a breadboard and jumper wires. Once everything is running and you've tested it, you can turn this prototype into a more robust form so that it can be deployed outside and be relatable in the long term.
+
 ### Hardware
 
 + A Raspberry Pi.
@@ -20,10 +22,11 @@ The specific sensors here are chosen after considering a number of factors:
 + [An anemometer, wind vane and rain gauge](https://www.argentdata.com/catalog/product_info.php?products_id=145){:target="_blank"}
 + An RJ11 breakout board (optional)
 + An MCP3008 Analogue to digital Convertor Integrated Circuit.
++ Weatherproof enclosures
 
 ### Software
 
-+ The Oracle Raspberry Pi Weather Station Software. Install this by opening a Terminal window and typing:
++ The Oracle Raspberry Pi Weather Station Software. You don't need to install it, but you'll use some of the Python programs. Clone the GitHub repository this by opening a Terminal window and typing:
 ```bash
 git clone https://github.com/RaspberryPiFoundation/weather-station
 ```

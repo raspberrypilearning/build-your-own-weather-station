@@ -11,7 +11,10 @@ At two points within the magnet's rotation, it triggers a reed switch which prod
 
 There are many ways of doing this with Python. One approach is to treat the sensor like a Button and then use the `gpiozero` library to count the number of times it has been 'pressed'.
 
-- Consumer anemometers normally have two wires. Connect one to a ground pin and the other to GPIO14.
+- Consumer anemometers normally have two wires. Connect one to a ground pin and the other to GPIO14. If you're using the RJ11 connectors, the anemometer uses the middle two wires of the cable, which are normally pins 3 & 4 for on RJ11 breakout boards. With the anemometer added, your circuit should look like this:
+
+![](images/wind_speed_bb.png)
+
 - Open Idle and create a new Python file and save it as `/home/pi/wind.py`
 - Add the lines below to use gpiozero's Button functions and set up a Button on pin 14. Also create a variable called `count` to store the number of rotations.
 
@@ -96,7 +99,7 @@ interval = 5    # How often (secs) to report speed
 Then create a new function to handle the calculation. This should take the time period of the measurement as an input and use the formula above to work out the speed.
 
 ```python
-def calc_speed(time_sec):
+def calculate_speed(time_sec):
         global count  
         circumference_cm = (2 * math.pi) * radius_cm        
         rotations = count / 2.0
