@@ -2,7 +2,7 @@
 
 The BME280 sensor is a digital sensor that can measure temperature, humidity and atmospheric pressure. It is available in a number of breakout boards from popular manufacturers such as Adafruit and Sparkfun. This guide assumes you have the Adafruit package, but the instructions should be applicable to most versions.
 
-### Wiring up the sensor.
+### Wiring up the sensor
 
 ![](images/bme280_bb.png)
 
@@ -48,9 +48,13 @@ while True:
 
 ![](images/bme280_code_run.png)
 
+## Ground Temperature
+
 The BME280 will report the air temperature, but this can be significantly warmer than the ground, particularly if it is frosty.   A thermal probe stuck into the soil is a useful supplemental temperature measurement and can be used to indicate the presence of ice/frost in winter.  The Dallas DS18B20 temperature sensor comes in many forms including a waterproof thermal probe version and this is the sensor used on the Oracle Weather Station.
 
-- Normally the DS18B20 comes with 3 bare wires so the easiest way to prototype and test the sensor is using PCB mount screw terminal blocks which can also be plugged into breadboards. Add your DS18B20 to your circuit as shown in the diagram below.  
+### Wiring up the sensor
+
+- Normally the DS18B20 comes with 3 bare wires so the easiest way to prototype and test the sensor is using PCB mount screw terminal blocks which can also be plugged into breadboards. Add your DS18B20 to your circuit as shown in the diagram below.  Note that you are setting up 3.3v and Ground rails along the side of the breadboard. These will be used as you add extra sensors into the circuit.
 
 ![](images/ground_temp_bb.png)
 

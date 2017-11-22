@@ -28,16 +28,7 @@ Unlike an Arduino which has analogue inputs, the Raspberry Pi only has digital i
 
 A popular and versatile ADC is the MCP3008. It is a 16 pin Integrated Circuit (IC) that can easily be used with a breadboard and has 8 analogue inputs. It is a 10 bit ADC which means that is has 2^10 possible output values: so for a reference voltage of 5v, the smallest change in voltage that the MCP3008 can detect is 5/1024 = 4.88mV.
 
-### Connecting the MCP3008
-
-![](images/MCP3008_bb.png)
-
-```Python
-from gpiozero import MCP3008
-adc = MCP3008(channel=0)
-voltage = adc.value * 3.3
-```
-Now you can measure a changing analog signal using the MCP3008, we can use another clever circuit to produce a voltage that varies with the resistance of the wind vane.
+Now you can measure a changing analog signal using the MCP3008, you can use another clever circuit to produce a voltage that varies with the resistance of the wind vane.
 
 ### Using a voltage divider
 
@@ -144,7 +135,16 @@ You should find that 4.7K is a good value for the recommended wind vane.
 
 - Now you know the value for R1 in the voltage divider circuit, you can wire everything up to your ADC and the Pi.
 
-![](images/MCP3008_vane_bb.png)
+![](images/wind_direction_bb.png)
+
+Reading values from an MCP3008 ADC is very easy thanks to the GPIO Zero library.
+
+```Python
+from gpiozero import MCP3008
+adc = MCP3008(channel=0)
+print(adc.value)
+```
+This code will print value read from the ADC on channel 0, scaled to a value between 0 and 1. To find the actual analog voltage recorded, multiply by the reference voltage supplied to the ADC.
 
 - You need to test that your circuit is able to discriminate between the various angular positions of the wind vane. Create a small python program called `vane_test.py` to count the different values produced by your circuit when the vane is rotated.  
 
