@@ -141,12 +141,14 @@ Reading values from an MCP3008 ADC is very easy thanks to the GPIO Zero library.
 
 ```Python
 from gpiozero import MCP3008
+import time
 adc = MCP3008(channel=0)
+
 print(adc.value)
 ```
 This code will print value read from the ADC on channel 0, scaled to a value between 0 and 1. To find the actual analog voltage recorded, multiply by the reference voltage supplied to the ADC.
 
-- You need to test that your circuit is able to discriminate between the various angular positions of the wind vane. Create a small python program called `vane_test.py` to count the different values produced by your circuit when the vane is rotated.  
+- You need to test that your circuit is able to discriminate between the various angular positions of the wind vane. Create a small python program called `wind_direction_byo.py` to count the different values produced by your circuit when the vane is rotated.  
 
 ---hints---
 ---hint---
@@ -154,6 +156,7 @@ Use the gpiozero library to create a MCP3008 instance:
 
 ```Python
 from gpiozero import MCP3008
+import time
 adc = MCP3008(channel=0)
 ```
 
@@ -172,6 +175,7 @@ Then add a loop to repeatedly read voltage from the ADC and add the value to the
 A complete solution is:
 ```Python
 from gpiozero import MCP3008
+import time
 adc = MCP3008(channel=0)
 count = 0
 values = []
@@ -220,6 +224,7 @@ Then use an `if...else` conditional statement to test if the value from the ADC 
 A complete solution is:
 ```Python
 from gpiozero import MCP3008
+import time
 adc = MCP3008(channel=0)
 count = 0
 volts = [0.4, 1.4, 1.2, 2.8,
@@ -240,7 +245,7 @@ The final step is to convert the readings from the vane into angles. At the hear
 
 You can calculate the relationship between resistance and voltage using the `voltage_divider` function you wrote earlier. You can then look up the corresponding angle from the datasheet. So for example, a voltage measured by the ADC of 0.4v corresponds to a resistance of 3.3K, which maps onto an angle of 0 (or 360) degrees.
 
-- Modify your `vane_test.py` and change your list of voltages into a Python dictionary: the voltages will be the keys and the corresponding angles will be the values.
+- Modify your `wind_direction_byo.py` and change your list of voltages into a Python dictionary: the voltages will be the keys and the corresponding angles will be the values.
 
 [[[generic-python-key-value-pairs]]]
 
@@ -254,22 +259,22 @@ Use the `voltage_divider` function to print the voltages and their corresponding
 ---hint---
 Your dictionary should look like this:
 ```python
-volts = {0.4: 3300,
-         1.4: 6570,
-         1.2: 8200,
-         2.8: 891,
-         2.7: 1000,
-         2.9: 688,
-         2.2: 2200,
-         2.5: 1410,
-         1.8: 3900,
-         2.0: 3140,
-         0.7: 16000,
-         0.8: 14120,
-         0.1: 120000,
-         0.3: 42120,
-         0.2: 64900,
-         0.6: 21880}
+volts = {0.4: 0.0,
+         1.4: 22.5,
+         1.2: 45.0,
+         2.8: 67.5,
+         2.7: 90.0,
+         2.9: 112.5,
+         2.2: 135.0,
+         2.5: 157.5,
+         1.8: 180.0,
+         2.0: 202.5,
+         0.7: 225.0,
+         0.8: 247.5,
+         0.1: 270.0,
+         0.3: 292.5,
+         0.2: 315.0,
+         0.6: 337.5}
 ```
 ---/hint---
 ---hint---
@@ -277,25 +282,26 @@ volts = {0.4: 3300,
 A complete solution is:
 ```Python
 from gpiozero import MCP3008
+import time
 adc = MCP3008(channel=0)
 count = 0
 values = []
-volts = {0.4: 3300,
-         1.4: 6570,
-         1.2: 8200,
-         2.8: 891,
-         2.7: 1000,
-         2.9: 688,
-         2.2: 2200,
-         2.5: 1410,
-         1.8: 3900,
-         2.0: 3140,
-         0.7: 16000,
-         0.8: 14120,
-         0.1: 120000,
-         0.3: 42120,
-         0.2: 64900,
-         0.6: 21880}
+volts = {0.4: 0.0,
+         1.4: 22.5,
+         1.2: 45.0,
+         2.8: 67.5,
+         2.7: 90.0,
+         2.9: 112.5,
+         2.2: 135.0,
+         2.5: 157.5,
+         1.8: 180.0,
+         2.0: 202.5,
+         0.7: 225.0,
+         0.8: 247.5,
+         0.1: 270.0,
+         0.3: 292.5,
+         0.2: 315.0,
+         0.6: 337.5}
 while True:
     wind =round(adc.value*3.3,1)
     if not wind in volts:
@@ -307,3 +313,71 @@ while True:
 ---/hints---
 
 You now have a Python program that reads the angle of the wind vane. Test it by setting the wind vane into a certain position and checking that the code displays the correct value. repeat for different positions.  
+
+There is one last improvement we can make to the accuracy of our results, and that is to take multiple readings over a short period of time and then calculate the average value. The maths behind this is more complicated that you might think - you can read about it in detail [here](http://en.wikipedia.org/wiki/Directional_statistics){:target="_blank"}
+
+- Add the function below to your `wind_direction_byo.py` code.
+
+
+```python
+def get_average(angles):
+    sin_sum = 0.0
+    cos_sum = 0.0
+
+    for angle in angles:
+        r = math.radians(angle)
+        sin_sum += math.sin(r)
+        cos_sum += math.cos(r)
+
+    flen = float(len(angles))
+    s = sin_sum / flen
+    c = cos_sum / flen
+    arc = math.degrees(math.atan(s / c))
+    average = 0.0
+
+    if s > 0 and c > 0:
+        average = arc
+    elif c < 0:
+        average = arc + 180
+    elif s < 0 and c > 0:
+        average = arc + 360
+
+    return 0.0 if average == 360 else average
+```
+- To use it, you'll also need to import the `math` library by adding this line to the top of your file.
+
+```python
+import math
+```
+
+- Now, using a similar technique to how you checked for wind gusts in the previous step, modify your program so that you return the average value for a given time period.
+
+---hints---
+---hint---
+Store a number of wind direction values in a list then use the `get_average()` function to calculate the average.
+
+---/hint---
+---hint---
+
+You can use the `time.time()` function to accurately record values for a given time period.
+---/hint---
+---hint---
+
+A complete solution is:
+```Python
+def get_value(length=5):
+    data = []
+    print("Measuring wind direction for %d seconds..." % length)
+    start_time = time.time()
+
+    while time.time() - start_time <= length:
+        wind =round(adc.value*3.3,1)
+        if not wind in volts: # keep only good measurements
+            print('unknown value ' + str(wind))
+        else:
+            data.append(volts[wind])
+
+    return get_average(data)
+```
+---/hint---
+---/hints---
