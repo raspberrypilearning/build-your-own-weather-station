@@ -350,7 +350,7 @@ def get_average(angles):
 import math
 ```
 
-- Now, using a similar technique to how you checked for wind gusts in the previous step, modify your program so that you return the average value for a given time period.
+- Now, using a similar technique to how you checked for wind gusts in the previous step, modify your program so that in has a function *get_value()* that returns the average value for a given time period.
 
 ---hints---
 ---hint---

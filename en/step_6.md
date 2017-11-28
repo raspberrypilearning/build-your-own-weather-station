@@ -11,27 +11,27 @@ At two points within the magnet's rotation, it triggers a reed switch which prod
 
 There are many ways of doing this with Python. One approach is to treat the sensor like a Button and then use the `gpiozero` library to count the number of times it has been 'pressed'.
 
-- Consumer anemometers normally have two wires. Connect one to a ground pin and the other to GPIO14. If you're using the RJ11 connectors, the anemometer uses the middle two wires of the cable, which are normally pins 3 & 4 for on RJ11 breakout boards. With the anemometer added, your circuit should look like this:
+- Consumer anemometers normally have two wires. Connect one to a ground pin and the other to GPIO5. If you're using the RJ11 connectors, the anemometer uses the middle two wires of the cable, which are normally pins 3 & 4 for on RJ11 breakout boards. With the anemometer added, your circuit should look like this:
 
 ![](images/wind_speed_bb.png)
 
 - Open Idle and create a new Python file and save it as `/home/pi/wind.py`
-- Add the lines below to use gpiozero's Button functions and set up a Button on pin 14. Also create a variable called `count` to store the number of rotations.
+- Add the lines below to use gpiozero's Button functions and set up a Button on pin 5. Also create a variable called `wind_count` to store the number of rotations.
 
 ```python
 from gpiozero import Button
 
-wind_speed_sensor = Button(14)
-count = 0
+wind_speed_sensor = Button(5)
+wind_count = 0
 ```
 
 - Now define a function that will be run whenever the pin is activated by a spin of the anemometer.
 
 ```python
 def spin():
-    global count
-    count = count + 1
-    print("spin" + str(count))
+    global wind_count
+    wind_count = wind_count + 1
+    print("spin" + str(wind_count))
 
 wind_speed_sensor.when_pressed = spin
 ```
@@ -70,8 +70,8 @@ To implement this formula in Python we can use the `math` library. So if you mea
 import math
 
 radius_cm = 9.0
-interval = 5
-count = 17
+wind_interval = 5
+wind_count = 17
 
 circumference_cm = (2 * math.pi) * radius_cm
 rotations = count / 2.0
@@ -80,6 +80,7 @@ speed = dist_cm / interval
 
 print(speed)
 ```
+- Remove (or comment out) the line in the `spin` function that prints out the `wind_count` value.
 
 - Now use this formula to modify your `wind.py` code so that it also calculates the speed of the wind in cm/s.
 
@@ -88,10 +89,10 @@ print(speed)
 First import the `math` and `time` libraries, and set some variables to hold the radius of your anemometer and the time interval for measurements.
 
 ```python
-from time import sleep
+import time
 import math
 radius_cm = 9.0 # Radius of your anemometer
-interval = 5    # How often (secs) to report speed
+wind_interval = 5    # How often (secs) to report speed
 ```
 
 ---/hint---
@@ -100,57 +101,57 @@ Then create a new function to handle the calculation. This should take the time 
 
 ```python
 def calculate_speed(time_sec):
-        global count  
+        global wind_count  
         circumference_cm = (2 * math.pi) * radius_cm        
-        rotations = count / 2.0
+        rotations = wind_count / 2.0
         dist_cm = circumference_cm * rotations
         speed = dist_cm / time_sec
 
         return speed
 ```
 
-Note that you need to declare the `count` variable as global so that it can be accessed from within the function.
+Note that you need to declare the `wind_count` variable as global so that it can be accessed from within the function.
 ---/hint---
 ---hint---
 Finally, add a loop to continually take measurements every 5 seconds. The complete code could look like this:
 
 ```python
 from gpiozero import Button
-from time import sleep
+import time
 import math
 
-count = 0       # Counts how many half-rotations
+wind_count = 0       # Counts how many half-rotations
 radius_cm = 9.0 # Radius of your anemometer
-interval = 5    # How often (secs) to report speed
+wind_interval = 5    # How often (secs) to report speed
 
 # Every half-rotation, add 1 to count
 def spin():
-	global count
-	count = count + 1
-	print( count )
+	global wind_count
+	wind_count = wind_count + 1
+	# print("spin" + str(wind_count))
 
 # Calculate the wind speed
 def calculate_speed(interval):
-        global count  
+        global wind_count  
         circumference_cm = (2 * math.pi) * radius_cm        
-        rotations = count / 2.0
+        rotations = wind_count / 2.0
 
         # Calculate distance travelled by a cup in cm
         dist_cm = circumference_cm * rotations
 
-        speed = dist_cm / interval
+        speed = dist_cm / wind_interval
 
         return speed
 
 
-wind_speed_sensor = Button(14)
+wind_speed_sensor = Button(5)
 wind_speed_sensor.when_activated = spin
 
 # Loop to measure wind speed and report at 5-second intervals
 while True:
-        count = 0
-        sleep(interval)
-        print( calculate_speed(interval), "cm/h")
+        wind_count = 0
+        time.sleep(wind_interval)
+        print( calculate_speed(wind_interval), "cm/h")
 ```
 
 ---/hint---
@@ -181,13 +182,13 @@ SECS_IN_AN_HOUR = 3600
 Your new `calculate_speed` function should look like this:
 ```python
 def calculate_speed(interval):
-    global count
+    global wind_count
     circumference_cm = (2 * math.pi) * radius_cm
-    rotations = count / 2.0
+    rotations = wind_count / 2.0
 
     dist_km = (circumference_cm * rotations) / CM_IN_A_KM
 
-    km_per_sec = dist_km / interval
+    km_per_sec = dist_km / wind_interval
     km_per_hour = km_per_sec * SECS_IN_AN_HOUR
 
     return km_per_hour
@@ -216,15 +217,14 @@ Store the anemometer adjustment value as a constant with the value of 1.18, and 
 ```python
 ADJUSTMENT = 1.18
 ```
-
 ---/hint---
 ---hint---
 Your new `calculate_speed` function should look like this:
 ```python
 def calculate_speed(time_sec):
-    global count
+    global wind_count
     circumference_cm = (2 * math.pi) * radius_cm
-    rotations = count / 2.0
+    rotations = wind_count / 2.0
 
     dist_km = (circumference_cm * rotations) / CM_IN_A_KM
 
@@ -238,3 +238,11 @@ def calculate_speed(time_sec):
 
 - You'll need to alter the final `print` line of your code so that it now shows the output in the correct units.
 - Re-run the code and this time you should get a value closer to 2.4.
+
+- It will be useful to be able to reset our `wind_count` variable to zero, so now add a function that does that.
+
+```python
+def reset_wind():
+    global wind_count
+    wind_count = 0
+```

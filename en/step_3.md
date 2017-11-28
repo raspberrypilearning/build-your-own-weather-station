@@ -22,7 +22,7 @@ Some other breakout boards may have other pins (such as SDO or CSB) but these ar
 
 [[[rpi-gui-idle-opening]]]
 
-- Create a new Python file and save it as `/home/pi/weather-station/humtemp.py`
+- Create a new Python file and save it as `/home/pi/weather-station/bme280_sensor.py`
 
 ```python
 import bme280
@@ -35,7 +35,6 @@ bus = smbus2.SMBus(port)
 
 bme280.load_calibration_params(bus,address)
 
-
 while True:
     bme280_data = bme280.sample(bus,address)
     humidity  = bme280_data.humidity
@@ -45,6 +44,44 @@ while True:
     sleep(1)
 ```
 - Now test the code. While the code is running, exhale onto the sensor and you should see the humidity values (and possibly the temperature values) increase. When you've finished testing, terminate the code by typing cntrl+c in the Python shell.
+
+Once you're ahppy that the sensor is recording sensible values, modify the program so that it is ready to be used as part of the whole weather station operation later.
+
+- Replace the `while True`  loop with a function called `read_all()` that returns the humidity, pressure and temperature readings, in that order.
+
+---hints---
+---hint---
+Functions are declared with the `def` keyword:
+
+```python
+def read_all():
+```
+
+---/hint---
+---hint---
+Add a line to sample the data from the I2C device. Then return the temperature, pressure and humidity components of that reading.
+
+---/hint---
+---hint---
+Your file should look like this:
+```python
+import bme280
+import smbus2
+from time import sleep
+
+port = 1
+address = 0x76
+bus = smbus2.SMBus(port)
+
+bme280_load_calibration_params(bus, address)
+
+def read_all():
+    bme280_data = bme.sample(bus,address)
+    return bme280_data.humidity, bme280_data.pressure, bme280_data.temperature
+
+```
+---/hint---
+---/hints---
 
 ![](images/bme280_code_run.png)
 
