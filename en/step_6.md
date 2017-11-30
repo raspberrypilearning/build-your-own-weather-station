@@ -15,7 +15,7 @@ There are many ways of doing this with Python. One approach is to treat the sens
 
 ![](images/wind_speed_bb.png)
 
-- Open Idle and create a new Python file and save it as `/home/pi/wind.py`
+- Open Idle and create a new Python file and save it as `/home/pi/weather-station/wind.py`
 - Add the lines below to use gpiozero's Button functions and set up a Button on pin 5. Also create a variable called `wind_count` to store the number of rotations.
 
 ```python

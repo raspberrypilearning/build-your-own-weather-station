@@ -148,7 +148,7 @@ print(adc.value)
 ```
 This code will print value read from the ADC on channel 0, scaled to a value between 0 and 1. To find the actual analog voltage recorded, multiply by the reference voltage supplied to the ADC.
 
-- You need to test that your circuit is able to discriminate between the various angular positions of the wind vane. Create a small python program called `wind_direction_byo.py` to count the different values produced by your circuit when the vane is rotated.  
+- You need to test that your circuit is able to discriminate between the various angular positions of the wind vane. Create a small python program called `/home/pi/weather-station/wind_direction_byo.py` to count the different values produced by your circuit when the vane is rotated.  
 
 ---hints---
 ---hint---

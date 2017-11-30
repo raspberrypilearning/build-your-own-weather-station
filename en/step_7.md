@@ -8,7 +8,7 @@ A wind gust is a brief increase in wind speed that can occur whenever the wind i
 
 When your Weather Station is fully operational, you can record the maximum wind speed during a given period (the gust) as well as the average speed. You can do this by constantly taking wind speed measurements for 5 seconds, and temporarily storing them for processing every few minutes. To do this we will use a Python data structure called a list.
 
-- Open Idle and the open file your `/home/pi/wind.py` file that you created in the last step.
+- Open Idle and the open file your `/home/pi/weather-station/wind.py` file that you created in the last step.
 
 - Add a line at the very top to import the *statistics* library.
 
@@ -22,15 +22,15 @@ import statistics
 store_speeds = []
 ```
 
-- Now modify the `while True` loop so that it contains a sub-loop that continually takes wind speed readings, and adds them to this list.
+- Now modify the `while True` loop so that it contains a sub-loop that continually takes wind speed readings, and adds them to this list. You can then use `statistics.mean` to calculate the mean value. 
 
 ```python
 while True:
-    wind_start_time = time.time()
-    while time.time() - wind_start_time <= wind_interval:
+    start_time = time.time()
+    while time.time() - start_time <= wind_interval:
         reset_wind()
         time.sleep(wind_interval)
-        final_speed = calculate_speed(wind_interval)# Add this speed to the list
+        final_speed = calculate_speed(wind_interval)
         store_speeds.append(final_speed)
 
     wind_gust = max(store_speeds)
