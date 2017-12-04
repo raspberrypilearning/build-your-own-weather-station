@@ -22,7 +22,7 @@ import bme280_sensor
 import wind_direction_byo
 import statistics
 import ds18b20_therm
-import database
+
 ```
 As it currently stands, your code will continually record the wind speed every 5 seconds, keeping track of the largest measurement (gusts) and calculating the mean speed. You can extend this to also simultaneously measure wind direction.
 
@@ -149,6 +149,40 @@ while True:
 
 Now you can add the other sensors into this 5 minute loop.
 
+## Rainfall
+
+Now you integrate the code your wrote for measuring rainfall  from `rainfall.py` into `weather_station_BYO.py` so that rainfall is measured for every 5 minutes and then the count reset.
+
+- Add the bucket size constant definition to the list of other similar variables after the import lines.
+
+```python
+BUCKET_SIZE = 0.2794
+```
+
+- Add these lines before the `while True:` loop.
+
+```python
+
+def bucket_tipped():
+    global rain_count
+    rain_count = rain_count + 1
+    #print (rain_count * BUCKET_SIZE)
+
+def reset_rainfall():
+    global rain_count
+    rain_count = 0
+
+rain_sensor = Button(6)
+rain_sensor.when_pressed = bucket_tipped
+```    
+
+Then, after the lines which calculate the wind gusts and speed, add this code:
+
+```python
+rainfall = rain_count * BUCKET_SIZE
+reset_rainfall()
+```
+
 ## Temperature, Pressure and humidity
 
 When you wrote the code for the BME280 pressure, temperature and humidity sensor, you created a `read_all` function to return all three measurements. You can call this function from within `weather_station_BYO.py` as you've included your `bme280_sensor` program as an imported library.
@@ -165,7 +199,7 @@ humidity, pressure, ambient_temp = bme280_sensor.read_all()
 ```
 ---/hint---
 ---hint---
-Your completed code should look  like this:
+Your completed loop code  for making measurements should look like this:
 
 ```python
 while True:
@@ -180,11 +214,12 @@ while True:
         final_speed = calculate_speed(wind_interval)
         store_speeds.append(final_speed)
     wind_average = wind_direction_byo2.get_average(store_directions)
-
     wind_gust = max(store_speeds)
     wind_speed = statistics.mean(store_speeds)
+    rainfall = rain_count * BUCKET_SIZE
+    reset_rainfall()
     humidity, pressure, ambient_temp = bme280_sensor.read_all()
-    print(wind_speed, wind_gust, wind_average, humidity, pressure, ambient_temp)
+    print(wind_speed, wind_gust, rainfall, wind_average, humidity, pressure, ambient_temp)
     store_speeds = []
     store_directions =[]
 ```
@@ -195,6 +230,7 @@ while True:
 
 - Now do the same thing for the ground temperature probe. Modify your code so that readings are collected every 5 minutes.
 
+---hints---
 ---hint---
 You will need to initialise the sensor first:
 
@@ -202,7 +238,7 @@ You will need to initialise the sensor first:
 temp_probe = ds18b20_therm.DS18B20()
 ```
 ---/hint---
----hints---
+
 ---hint---
 You can use the `read_temp()` function.
 ---/hint---
@@ -291,21 +327,117 @@ while True:
         final_speed = calculate_speed(wind_interval)# Add this speed to the list
         store_speeds.append(final_speed)
     wind_average = wind_direction_byo2.get_average(store_directions)
-
     wind_gust = max(store_speeds)
     wind_speed = statistics.mean(store_speeds)
+    rainfall = rain_count * BUCKET_SIZE
+    reset_rainfall()
     store_speeds = []
     #print(store_directions)
     store_directions = []
     ground_temp = temp_probe.read_temp()
     humidity, pressure, ambient_temp = bme280_sensor.read_all()
 
-    print(wind_average, wind_speed, wind_gust, humidity, pressure, ambient_temp, ground_temp)
+    print(wind_average, wind_speed, wind_gust, rainfall,  humidity, pressure, ambient_temp, ground_temp)
 
 
 ```
 ---/hint---
 ---/hints---
+
+## Storing measurements in a database
+
+One of the best ways to store your Weather data is in a database. Databases can store very large numbers of records efficiently and make it easier to sort, search and analyse your measurements.
+
+There are many different choices of database software but MariaDb is a good, versatile general-purpose product. You should have already installed it - if not, head back to "What you will need" and follow the instructions there.
+
+Now to configure the database.
+
+- The database server will already be running. To connect to it, open a Terminal Window and type:
+
+```bash
+sudo mysql
+```
+
+You should then see that the command line prompt changes to be `MariaDB [(none)]>`. You should type the configuration commands at this prompt.
+
+- First create a user and a password. You can choose whatever username you want, but make sure it has a strong password and that you remember the password you set.
+
+```bash
+create user pi IDENTIFIED by 'my54cr4t';
+```
+The command above will create a user named `pi` with the password `my54cr4t`.  
+
+- Assign all permission to this user.
+```bash
+grant all privileges on *.* to 'pi' with grant option;
+```
+
+Remember to change `pi` to whatever username you created in the previous step.
+
+- You can have more than one database on a server. You're going to create one called `weather` to hold your data:
+
+```bash
+create database weather;
+```
+
+- Your database should have a table called WEATHER_MEASUREMENT which will hold all of your records. First, select the weather database as the place where this table will be stored:
+
+```bash
+use weather;
+```
+You should now see the prompt change to be `MariaDB [weather]>`.
+
+![](images/mariadb.png)
+
+- Create the WEATHER_MEASUREMENT table with fields to hold your weather data.
+
+```bash
+CREATE TABLE WEATHER_MEASUREMENT(
+ID BIGINT NOT NULL AUTO_INCREMENT,
+REMOTE_ID BIGINT,
+AMBIENT_TEMPERATURE DECIMAL(6,2) NOT NULL,
+GROUND_TEMPERATURE DECIMAL(6,2) NOT NULL,
+AIR_QUALITY DECIMAL(6,2) NOT NULL,
+AIR_PRESSURE DECIMAL(6,2) NOT NULL,
+HUMIDITY DECIMAL(6,2) NOT NULL,
+WIND_DIRECTION DECIMAL(6,2) NULL,
+WIND_SPEED DECIMAL(6,2) NOT NULL,
+WIND_GUST_SPEED DECIMAL(6,2) NOT NULL,
+RAINFALL DECIMAL (6,2) NOT NULL,
+CREATED TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+PRIMARY KEY ( ID )
+);
+```
+Now you can modify your `weather_station_BYO.py` program to record data in the database. Once again you can use code from the Oracle Raspberry Pi Weather Station software.
+
+- Add this line to the top of `weather_station_BYO.py`:
+
+```python
+import database
+```
+- Just before the main `while True` loop, add this line to connect your code to the MariaDB database:
+
+```python
+db = database.weather_database()
+```
+- Then finally, under the line in the main `while True` loop that prints your data readings, add this line to insert a row of records into the database:
+
+```python
+db.insert(ambient_temp, ground_temp, 0, pressure, humidity, wind_average, wind_speed, wind_gust, rainfall)
+```
+
+- Save your code. Now using nano or another text editor, modify the `/home/pi/weather-station/credentials.mysql` file so that it contains the username and password you created for your MariaDB database.
+
+ ```json
+ {
+"HOST": "localhost",
+"USERNAME": "pi",
+"PASSWORD": "my54cr4t",
+"DATABASE": "weather"
+}
+ ```
+
+- Test your weather_station_BYO.py.
 
 You should now have working weather station prototype on breadboard. This is perfect for testing but probably not suitable for long-term, reliable installation outside.
 
