@@ -36,7 +36,7 @@ Voltage dividers are one of the most fundamental circuits in electronics and are
 
 ![](images/voltage-divider.png)
 
-In the circuit above, Vout can be calculated using the formula:
+In the circuit above, *Vout* can be calculated using the formula:
 
 Vout = Vin * R2/R1 +R2
 
@@ -201,7 +201,7 @@ while True:
 
 ![](images/vane_test3.png)
 
-- Modify your code to include a list of the possible correct values and check each reading from the ADC against this list. Have your code print a helpful message for each reading.
+- Modify your code to include a list of the possible correct values and check each reading from the ADC against this list. Have your code print a helpful message for each reading that indicates whether it was one of the correct values or not. 
 
 ---hints---
 ---hint---

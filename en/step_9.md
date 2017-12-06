@@ -138,8 +138,8 @@ def bucket_tipped():
     print (count * BUCKET_SIZE)
 
 def reset_rainfall():
-    global counter
-    counter = 0
+    global count
+    count = 0
 
 rain_sensor.when_pressed = bucket_tipped
 ```

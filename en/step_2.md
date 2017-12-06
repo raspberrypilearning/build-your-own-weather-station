@@ -35,7 +35,7 @@ git clone https://github.com/RaspberryPiFoundation/weather-station
 ```bash
 sudo pip3 install RPi.bme280
 ```
-+ MariaDB
++ The MariaDB database server software.
 
 ```bash
 sudo apt-get install -y mariadb-server mariadb-client libmariadbclient-dev

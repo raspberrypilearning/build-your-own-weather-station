@@ -360,6 +360,8 @@ sudo mysql
 
 You should then see that the command line prompt changes to be `MariaDB [(none)]>`. You should type the configuration commands at this prompt.
 
+![](images/mariadb.png)
+
 - First create a user and a password. You can choose whatever username you want, but make sure it has a strong password and that you remember the password you set.
 
 ```bash
@@ -386,8 +388,6 @@ create database weather;
 use weather;
 ```
 You should now see the prompt change to be `MariaDB [weather]>`.
-
-![](images/mariadb.png)
 
 - Create the WEATHER_MEASUREMENT table with fields to hold your weather data.
 
@@ -437,7 +437,34 @@ db.insert(ambient_temp, ground_temp, 0, pressure, humidity, wind_average, wind_s
 }
  ```
 
-- Test your weather_station_BYO.py.
+## Test your weather_station_BYO.py.
+
+You may see warning messages about truncated values, but these can be safely ignored.
+
+- Run the code for a while to allow it to record several values (you can always adjust the value of the variable `interval` to a smaller number if you're impatient and don't want to wait 5 minutes in between each iteration).
+
+- Check that no errors are produced (except for the warnings about truncated values).
+
+- Open a Terminal Window and connect the the MariaDB database:
+
+```bash
+sudo mysql
+```
+- Select the *weather* database:
+
+```sql
+ use weather;
+ ```
+
+ - Then run this SQL query which will tell you how many rows are in the WEATHER_MEASUREMENT table:
+
+ ```SQL
+ select count(*) from WEATHER_MEASUREMENT;
+ ```
+
+This should display a number which matches the number of times your code has made a weather data measurement.
+
+![](images/sql_count.png)
 
 You should now have working weather station prototype on breadboard. This is perfect for testing but probably not suitable for long-term, reliable installation outside.
 
