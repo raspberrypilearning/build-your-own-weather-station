@@ -20,9 +20,10 @@ First of all you will develop and build a prototype weather station using a brea
 + Some 5mm pitch PCB mount screw terminal blocks
 + A breadboard and jumper wires
 + [An anemometer, wind vane and rain gauge](https://www.argentdata.com/catalog/product_info.php?products_id=145){:target="_blank"}
-+ An RJ11 breakout board (optional)
++ Two RJ11 breakout boards (optional)
 + An MCP3008 Analogue to digital Convertor Integrated Circuit.
 + Weatherproof enclosures
+
 
 ### Software
 
@@ -44,4 +45,9 @@ sudo pip3 install mysqlclient
 
 ### Additional Resources
 
-+ List additional resources, or delete section.
+If you are going to construct a permanent Weather HAT for your Pi you will also need:
++ Soldering iron, solder and safety equipment
++ Solid core wire (22 AWG)
++ An [Adafruit Perma-Proto HAT for Pi Mini Kit](https://www.adafruit.com/product/2310){:target="_blank"}
++ A 16 pin DIL/DIP IC Socket
++ General prototyping tools: Side-cutters, wire strippers. screwdrivers etc

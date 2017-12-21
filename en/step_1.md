@@ -6,6 +6,8 @@ The original Weather Station kit is a HAT for the Raspberry Pi which allows it t
 
 These kits have been very popular. If you're one of the many people who has been wanting to get hold of one, this guide will take you through the process of building your own.
 
+This is an advanced project both in terms of electronics and programming. You are should read through the whole project before purchasing any components.
+
 ### What you will make
 
 A Weather Station for collecting local climate and environmental data.
@@ -14,6 +16,11 @@ A Weather Station for collecting local climate and environmental data.
 
 This project covers elements from the following strands of the [Raspberry Pi Digital Making Curriculum](http://rpf.io/curriculum):
 
+[Use manufacturing techniques and tools to create a completed product](https://curriculum.raspberrypi.org/manufacture/developer/)
+
+[Process input data to monitor or react to the environment](https://curriculum.raspberrypi.org/physical-computing/developer/)
+
+[Apply abstraction and decomposition to solve more complex problems](https://curriculum.raspberrypi.org/programming/developer/)
 
 ### Additional information for educators
 

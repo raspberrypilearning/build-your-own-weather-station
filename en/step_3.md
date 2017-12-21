@@ -39,8 +39,8 @@ while True:
     bme280_data = bme280.sample(bus,address)
     humidity  = bme280_data.humidity
     pressure  = bme280_data.pressure
-    ambient_temperature = bme280_data.emperature
-    print(humidity, pressure, temperature)
+    ambient_temperature = bme280_data.temperature
+    print(humidity, pressure, ambient_temperature)
     sleep(1)
 ```
 - Now test the code. While the code is running, exhale onto the sensor and you should see the humidity values (and possibly the temperature values) increase. When you've finished testing, terminate the code by typing cntrl+c in the Python shell.

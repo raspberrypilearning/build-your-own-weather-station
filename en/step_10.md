@@ -2,6 +2,8 @@
 
 Now that you've tested all the sensors individually, it's time to set up the software so that you have a complete collection system.
 
+![](images/BYO_breadboard.JPG)
+
 The original Oracle Weather Station adopts a Unix daemon approach to running the software, and you can adapt that code to run your custom build. The GPIO connections you've been using so far match those expected by this software so a slightly modified version of the code will work, and you've already used the original Oracle Weather Station code for the DS18B20 digital thermal probe.
 
 To complete your custom Weather Station, you can also adapt and amalgamate the code you've written for testing to to regularly measure and record
@@ -364,13 +366,13 @@ You should then see that the command line prompt changes to be `MariaDB [(none)]
 
 - First create a user and a password. You can choose whatever username you want, but make sure it has a strong password and that you remember the password you set.
 
-```bash
+```SQL
 create user pi IDENTIFIED by 'my54cr4t';
 ```
 The command above will create a user named `pi` with the password `my54cr4t`.  
 
 - Assign all permission to this user.
-```bash
+```SQL
 grant all privileges on *.* to 'pi' with grant option;
 ```
 
@@ -378,20 +380,20 @@ Remember to change `pi` to whatever username you created in the previous step.
 
 - You can have more than one database on a server. You're going to create one called `weather` to hold your data:
 
-```bash
+```SQL
 create database weather;
 ```
 
 - Your database should have a table called WEATHER_MEASUREMENT which will hold all of your records. First, select the weather database as the place where this table will be stored:
 
-```bash
+```SQL
 use weather;
 ```
 You should now see the prompt change to be `MariaDB [weather]>`.
 
 - Create the WEATHER_MEASUREMENT table with fields to hold your weather data.
 
-```bash
+```SQL
 CREATE TABLE WEATHER_MEASUREMENT(
 ID BIGINT NOT NULL AUTO_INCREMENT,
 REMOTE_ID BIGINT,
@@ -452,7 +454,7 @@ sudo mysql
 ```
 - Select the *weather* database:
 
-```sql
+```SQL
  use weather;
  ```
 
@@ -465,16 +467,3 @@ sudo mysql
 This should display a number which matches the number of times your code has made a weather data measurement.
 
 ![](images/sql_count.png)
-
-You should now have working weather station prototype on breadboard. This is perfect for testing but probably not suitable for long-term, reliable installation outside.
-
-To modify this so that it will survive outdoors for a long period you will need to make more permanent connections. This will involve some soldering, but don't worry if you've never soldered before - there is a [great blog post and movie](https://www.raspberrypi.org/blog/getting-started-soldering/){:target="_blank"} to get you up to speed.
-
-## Powering your Weather Station
-
-POE
-Normal Power supply
-
-## Keeping your weather station dry
-
-This is really important. If the Pi or any of the electronics gets wet or even very damp, they will fail or start to corrode. The Oracle Weather Station uses a small weatherproof enclosure to house the external environmental sensors. The key idea is to allow outside air to flow around the sensors but to prevent moisture from reaching them
