@@ -13,6 +13,7 @@ When it comes to connecting them to your Pi, you have three options:
 - Use RJ11 breakout boards - these can be really helpful for prototyping but the larger ones can be too bulky for long term deployment. Smaller ones often come with solderable pins that can be used with stripboard  or a prototyping HAT to make a durable board. The suggestions for creating a permanent
 hardware solution later will use these breakout boards.
 
-![](images/RJ11_breakout.JPG)
+![](images/RJ11_breakout1.JPG)
+![](images/bme280_bb.png)
 
 - Use female RJ11 connectors - these are quite fiddly to use with breadboards but can provide a very sturdy connection if used with a Printed Circuit Board (PCB) as part of a permanent Weather Station.
