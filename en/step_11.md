@@ -40,6 +40,8 @@ You are recommended to take things one step at a time, testing each connection t
 
 Next, add connections for the  DS18B20 probe. You can be sneaky and make use of unused screw terminals on one of the RJ11 breakout boards: the rainfall gauge only uses the two centre pins of the connector so the 2 outer on either side are free.
 
+- Power off the Pi and remove the HAT.
+
 - Solder a 4.7K resistor in the bottom area as shown. Your RJ11 breakout board will need to sit just above this so try to seat the resistor so that it is flat against the top of the Adafruit board and not poking up in the end.
 
 ![](images/ada_3.png)
@@ -60,6 +62,56 @@ The connection to 3V will pass through a 'busy' part of the board if it goes ove
 
 - Some of the pre-soldered parts of these breakout boards can be quite spiky. To avoid these peaks of solder from causing shorts when it is placed onto the Adafruit board, carefully trim them with side cutters.  It is also a good idea to then cover them with a small strip of insulating tape.
 
+- Solder the RJ11 breakout board in place, making sure that the pins slot into the correct place on the Adafruit board.
+
+- Connect the DS18B20 to the screw terminals on the breakout board as shown below.
+
+![](images/DS18B20-screwterms.png)
+
+- Carefully remount the HAT on the Pi. Check that none of the soldered connections on the bottom of the Adafruit board are touching the top components on the Pi. Trim any wires or pins if they are.   
+
+- Power up the Pi and test your DS18B20 using the `ds18b20_therm.py` code just as you did earlier.
+
+- Connect the rain gauge's RJ11 connector to your HAT.
+
+- Test that the rain gauge works using the `rainfall.py` code that you wrote earlier.
+
+Now you need to add the MCP3008 ADC. While you can solder the Ic directly onto the Adafruit board, it is much better to use a DIP/DIL IC socket. This reduces the chance of damage to the IC and also makes its easier to swap it out in future.
+
+- Solder the socket onto the Adafruit board, in the position shown by the MCP3008 IC in the diagram.
+
+![](images/ada_6.png)
+
+- Now use 5 short strips of wire to make connections to the 3v and ground rails for the IC and the second RJ11 breakout board.
+
+![](images/ada_7.png)
+
+- Using some longer wire strips, add in the other connections to the GPIO pins. You can use either the front or the back of the board to route these connections, although soldering the GPIO ends near the black plastic of the female header on the back can be trickier than on top.
+
+![](images/ada_8.png)
+
+- Add two final wires for the wind vane part of the circuit.
+
+![](images/ada_9.png)
+
+- Then solder on the second 4.7K resistor.
+
+![](images/ada_10.png)
+
+- The final step is to add the second RJ11 breakout board, remembering to ensure there are no short-circuits caused by spiky or long pins protruding from the bottom of the board.
+
+![](images/ada_11.png)
+
+- Carefully insert the MP3008 Ic into the socket. You may need to gently bend the legs slightly so that they fit in without being crushed under the main body of the chip itself.
+
+- Remount the HAT on the Pi again. Check that none of the soldered connections on the bottom of the Adafruit board are touching the top components on the Pi. Trim any wires or pins if they are.
+
+- Plug in the RJ11 connector from the wind sensors and test them using the `wind_direction_byo.py` and `wind.py` code you wrote earlier.
+
+- You should now have a fully working weather HAT. Test it for a while with the full code you wrote in the previous step.
+
 ## Keeping your weather station dry
 
-This is really important. If the Pi or any of the electronics gets wet or even very damp, they will fail or start to corrode. The Oracle Weather Station uses a small weatherproof enclosure to house the external environmental sensors. The key idea is to allow outside air to flow around the sensors but to prevent moisture from reaching them
+This is really important. If the Pi or any of the electronics gets wet or even very damp, they will fail or start to corrode. The Oracle Weather Station uses a small weatherproof enclosure to house the external environmental sensors. The key idea is to allow outside air to flow around the sensors but to prevent moisture from reaching them.
+
+- Find two waterproof enclosures, one larger one for the Pi and the breadboard or HAT, and another smaller one for the BME280. The larger box should have a couple of holes that can be used to allow out the RJ11 cables for the wind and rain sensors, and some long wires for the BME280.

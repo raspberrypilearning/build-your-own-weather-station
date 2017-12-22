@@ -13,7 +13,7 @@ First of all you will develop and build a prototype weather station using a brea
 
 ### Hardware
 
-+ A Raspberry Pi.
++ A Raspberry Pi, either one that has built-in wifi or with a wifi dongle.
 + A BME280 pressure, temperature and humidity sensor.
 + A DS18B20 digital thermal probe (with 1m lead)
 + Two 4.7 K Ohm resistors.
@@ -52,3 +52,4 @@ If you are going to construct a permanent Weather HAT for your Pi you will also 
 + A 16 pin DIL/DIP IC Socket
 + Two 2-pin male headers
 + General prototyping tools: Side-cutters, wire strippers. screwdrivers etc
++ Insulating tape
