@@ -50,4 +50,5 @@ If you are going to construct a permanent Weather HAT for your Pi you will also 
 + Solid core wire (22 AWG)
 + An [Adafruit Perma-Proto HAT for Pi Mini Kit](https://www.adafruit.com/product/2310){:target="_blank"}
 + A 16 pin DIL/DIP IC Socket
++ Two 2-pin male headers
 + General prototyping tools: Side-cutters, wire strippers. screwdrivers etc

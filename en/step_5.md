@@ -14,6 +14,6 @@ When it comes to connecting them to your Pi, you have three options:
 hardware solution later will use these breakout boards.
 
 ![](images/RJ11_breakout1.JPG)
-![](images/bme280_bb.png)
+
 
 - Use female RJ11 connectors - these are quite fiddly to use with breadboards but can provide a very sturdy connection if used with a Printed Circuit Board (PCB) as part of a permanent Weather Station.
