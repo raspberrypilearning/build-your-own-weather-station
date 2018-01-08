@@ -130,3 +130,7 @@ This is really important. If the Pi or any of the electronics gets wet or even v
 - The larger box can be installed inside. This makes it much easier to keep dry, and allows easier connection to power and networking. However, the various cables for the external sensors (rain gauge, wind vane and anemometer and BME280) all need to be routed inside so this may involve a bigger hole in an external wall. Mounting everything outside means you only have to supply power to the weather station (assuming you are using wifi for data transfer).
 
 - Most commercial enclosures will have holes for routing cables, some with grommets that help keep out moisture. Alternatively you can cut or drill your own holes and use grommets and sealing glands around the cables.
+
+## Share your design
+
+Now that you've built your weather station, why not share your design and installation with the community? If you've used different sensors or chosen another circuit layout, please post the details on the [Weather Station forum](https://www.raspberrypi.org/forums/viewforum.php?f=112&sid=e893b51c323da761164dc232a929f962) .  We always love to see photos of weather station builds and might feature them on our blog on in Weather Station newsletters. 

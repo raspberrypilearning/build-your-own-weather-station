@@ -2,12 +2,13 @@
 
 There are many different sensors available that you could use to make weather measurements. You don't have to use the exact same hardware to build your weather station, however if you choose different components you will need to also find (or write) a Python library that works with it.
 
-The specific sensors here are chosen after considering a number of factors:
+The specific sensors and components here were chosen after considering a number of factors:
 - Availability
 - Cost
 - Linux/Python support
 - Reliability
 - Accuracy
+- Ease of use
 
 First of all you will develop and build a prototype weather station using a breadboard and jumper wires. Once everything is running and you've tested it, you can turn this prototype into a more robust form so that it can be deployed outside and be relatable in the long term.
 

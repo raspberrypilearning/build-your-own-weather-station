@@ -21,4 +21,5 @@ steps:
   - title: Wind direction
   - title: Rainfall
   - title: Fully functional weather station
-  - title: Assembling everything ready for outdoors 
+  - title: Assembling everything ready for outdoors
+  - title: Challenge: Add custom sensors
