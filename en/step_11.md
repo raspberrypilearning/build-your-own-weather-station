@@ -1,7 +1,7 @@
 ## Assembling everything ready for outdoors
 You should now have working weather station prototype on breadboard. If you are happy keeping your weather station in this form then you skip ahead to the *Keeping your weather station dry* section.
 
-![](images/breadboard_zoom.png)
+![](images/breadboard_zoom.jpg)
 
 For a more robust, long term installation, or if you don't have room for a breadboard in your enclosure, you can construct a weather station HAT for your Pi. This will involve some soldering, but don't worry if you've never soldered before - there is a [great blog post and movie](https://www.raspberrypi.org/blog/getting-started-soldering/) to get you up to speed.
 
@@ -31,7 +31,7 @@ You are recommended to assemble and test things one step at a time, checking eac
 
 - First of all, solder the 40 pin header onto the Adafruit board.
 
-![](images/ada_header.png)
+![](images/ada_header.jpg)
 
 - Solder on two 2-pin male headers, one across the SCL and SDA connections in the top left, and one across the +3v and GND rails.
 
@@ -64,11 +64,11 @@ The connection to 3V will pass through a 'busy' part of the board if it goes ove
 
 - Now prepare RJ11 breakout board. Some of the pre-soldered parts of these breakout boards can be quite spiky. To avoid these peaks of solder from causing shorts when it is placed onto the Adafruit board, carefully trim them with side cutters.  It is also a good idea to then cover them with a small strip of insulating tape.
 
-![](images/RJ11_breakout_trim.JPG)
+![](images/RJ11_breakout_trim.png)
 
 - With some versions of the smaller boards,  the male pins you need to used to connect to the Adafruit board are are supplied separately. You may have to solder them onto the breakout board first. Make sure the shortest end of the pin is the part that you solder on. the longer end is the part that you'll solder onto the Adafruit board.
 
-![](images/RJ11_breakout_pins.JPG)
+![](images/RJ11_breakout_pins.jpg)
 
 
 - Solder the RJ11 breakout board in place, making sure that the pins slot into the correct place on the Adafruit board.
@@ -87,7 +87,7 @@ The connection to 3V will pass through a 'busy' part of the board if it goes ove
 
 Now you need to add the MCP3008 ADC. While you can solder the IC directly onto the Adafruit board, it is much better to use a DIP/DIL IC socket. This reduces the chance of damage to the IC and also makes its easier to swap it out in future.
 
-![](images/plinth.png)
+![](images/plinth.jpg)
 
 - Solder the socket onto the Adafruit board, in the position shown by the MCP3008 IC in the diagram.
 
@@ -129,4 +129,4 @@ This is really important. If the Pi or any of the electronics gets wet or even v
 
 - The larger box can be installed inside. This makes it much easier to keep dry, and allows easier connection to power and networking. However, the various cables for the external sensors (rain gauge, wind vane and anemometer and BME280) all need to be routed inside so this may involve a bigger hole in an external wall. Mounting everything outside means you only have to supply power to the weather station (assuming you are using wifi for data transfer).
 
-- Most commercial enclosures will have holes for routing cables, some with grommets that help keep out moisture. Alternatively you can cut or drill your own holes and use grommets and sealing glands around the cables. 
+- Most commercial enclosures will have holes for routing cables, some with grommets that help keep out moisture. Alternatively you can cut or drill your own holes and use grommets and sealing glands around the cables.

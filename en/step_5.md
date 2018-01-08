@@ -14,7 +14,7 @@ When it comes to connecting them to your Pi, you have three options:
 
 ![](images/RJ11_breakout_large.JPG)
 
-Smaller ones often come with solderable pins that can be used with stripboard  or a prototyping HAT to make a durable connection.
+Smaller ones often come with solderable pins that can be used with stripboard or a prototyping HAT to make a durable connection.
 
 ![](images/RJ11_breakout_small.JPG)
 
