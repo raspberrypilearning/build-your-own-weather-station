@@ -12,11 +12,11 @@ When it comes to connecting them to your Pi, you have three options:
 - Chop off the male RJ11 connectors and connect the wires using screw terminals or by soldering.
 - Use RJ11 breakout boards - these can be really helpful for prototyping but the larger ones can be too bulky for long term deployment.
 
-![](images/RJ11_breakout_large.JPG)
+![](images/RJ11_breakout_large.jpg)
 
 Smaller ones often come with solderable pins that can be used with stripboard or a prototyping HAT to make a durable connection.
 
-![](images/RJ11_breakout_small.JPG)
+![](images/RJ11_breakout_small.jpg)
 
 The assembly instructions later for creating a permanent hardware solution will use these smaller breakout boards.  
 - Use female RJ11 connectors - these are quite fiddly to use with breadboards but can provide a very sturdy connection if used with a Printed Circuit Board (PCB) as part of a permanent Weather Station.
