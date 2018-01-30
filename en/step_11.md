@@ -71,7 +71,7 @@ The connection to 3V will pass through a 'busy' part of the board if it goes ove
 ![](images/RJ11_breakout_pins.jpg)
 
 
-- Solder the RJ11 breakout board in place, making sure that the pins slot into the correct place on the Adafruit board.
+- Solder the RJ11 breakout board in place, making sure that the pins slot into the correct place on the Adafruit board. The pins from the breakout board are quite long and will make contact with the HDMI port on the Raspberry Pi when the HAT is in place. Therefore you should either trim them or use some insulating tape on the top of the HDMI port to prevent shorting.
 
 - Connect the DS18B20 to the screw terminals on the breakout board as shown below.
 
@@ -127,10 +127,32 @@ This is really important. If the Pi or any of the electronics gets wet or even v
 
 - Find two waterproof enclosures, one larger one for the Pi and the breadboard or HAT, and another smaller one for the BME280. The larger box should have a couple of holes that can be used to allow out the RJ11 cables for the wind and rain sensors, and some long wires for the BME280.
 
-- The larger box can be installed inside. This makes it much easier to keep dry, and allows easier connection to power and networking. However, the various cables for the external sensors (rain gauge, wind vane and anemometer and BME280) all need to be routed inside so this may involve a bigger hole in an external wall. Mounting everything outside means you only have to supply power to the weather station (assuming you are using wifi for data transfer).
-
 - Most commercial enclosures will have holes for routing cables, some with grommets that help keep out moisture. Alternatively you can cut or drill your own holes and use grommets and sealing glands around the cables.
+
+- If you're using the recommended enclosures as listed in "What you will need", then you can use these 3D printable mounts to secure the Raspberry Pi inside the larger box and the BME280 into the smaller one.
+
+![](images/bme280_bracket.jpg)
+
+![](images/big_box_bracket.jpg)
+
+- In oder to get representative readings for ambient temperature and humidity, air needs to circulate around the BMW280 sensor. Remove both hole covers from one side of the smaller box. You can then pass the wires for the sensor up through one hole. Make sure you position this box so that the holes are facing downwards when mounting outside so that rain cannot enter this way.
+
+![](images/small_box_holes.jpg)
+
+- Use waterproof nylon cable glands to prevent moisture entering the enclosure through the holes used for the cables. If the glands don't fit snugly around the cables you could 3D print some grommets or simply use electrical tape wrapped around the cable to make a tighter seal.
+
+- The larger recommended enclosure has holes on all four sides, sealed with rubber plugs. Use three of these holes along the bottom of the box to provide an escape route for your cables. Use a M16 cable gland in each of the two outer holes and pass the cable for the rain gauge through one and the cable for the wind sensors through the other.
+
+![](images/three_glands.jpg)
+
+- Then use the larger M20 gland for the centre hole and feed the power cable, DS18B20 probe and the wires for the BME280 through.
+
+![](images/glands.jpg)
+
+- The hole will need 'padding' with tape to tightly hold the cables but needs to accommodate  the Micro USB connector for the power cable. A 3D printable grommet is available here - use two rotated at 180 degrees to each other so that there is no gap all the way through.
+
+- The larger box can be installed inside. This makes it much easier to keep dry, and allows easier connection to power and networking. However, the various cables for the external sensors (rain gauge, wind vane and anemometer and BME280) all need to be routed inside so this may involve a bigger hole in an external wall. Mounting everything outside means you only have to supply power to the weather station (assuming you are using wifi for data transfer).
 
 ## Share your design
 
-Now that you've built your weather station, why not share your design and installation with the community? If you've used different sensors or chosen another circuit layout, please post the details on the [Weather Station forum](https://www.raspberrypi.org/forums/viewforum.php?f=112&sid=e893b51c323da761164dc232a929f962) .  We always love to see photos of weather station builds and might feature them on our blog on in Weather Station newsletters. 
+Now that you've built your weather station, why not share your design and installation with the community? If you've used different sensors or chosen another circuit layout, please post the details on the [Weather Station forum](https://www.raspberrypi.org/forums/viewforum.php?f=112&sid=e893b51c323da761164dc232a929f962) .  We always love to see photos of weather station builds and might feature them on our blog on in Weather Station newsletters.
