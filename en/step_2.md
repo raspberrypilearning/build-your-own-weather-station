@@ -23,7 +23,7 @@ First of all you will develop and build a prototype weather station using a brea
 + [An anemometer, wind vane and rain gauge](https://www.argentdata.com/catalog/product_info.php?products_id=145){:target="_blank"}
 + Two RJ11 breakout boards (optional)
 + An MCP3008 Analogue to digital Convertor Integrated Circuit.
-+ Weatherproof enclosures
++ Weatherproof enclosures. Recommended products are this [75x75x37mm](http://cpc.farnell.com/spelsberg/332-907/universal-junc-box-7-entry/dp/EN81013){:target="_blank"} box for the BME280 and this larger [150x110x70mm](http://cpc.farnell.com/olan/ol20112/box-ip55-glanded-150x110x70mm/dp/EN82191){:target="_blank"} box for the Pi and a soldered HAT. If you're going to stick with a less durable breadboard-only solution then you may need a larger enclosure such as this [190x140x70mm one] (http://cpc.farnell.com/olan/ol20013/box-ip55-glanded-190x140x70mm/dp/EN82192){:target="_blank"}
 
 
 ### Software

@@ -1,4 +1,7 @@
 ## Assembling everything ready for outdoors
+
+In order for your weather station to be able to upload data to somewhere that you can view and analyses it, it will need some form of Internet connection. Using wifi is typically the easiest way to do this but you can use the ethernet connection if that works better for your location.  You can find guides on setting up wireless connectivity on your Raspberry Pi [here](https://www.raspberrypi.org/documentation/configuration/wireless/) and there are some special hints for getting wifi access working with a weather station [here](https://www.raspberrypi.org/learning/weather-station-guide/outside2.md).
+
 You should now have working weather station prototype on breadboard. If you are happy keeping your weather station in this form then you skip ahead to the *Keeping your weather station dry* section.
 
 ![](images/breadboard_zoom.jpg)
@@ -143,15 +146,32 @@ This is really important. If the Pi or any of the electronics gets wet or even v
 
 - The larger recommended enclosure has holes on all four sides, sealed with rubber plugs. Use three of these holes along the bottom of the box to provide an escape route for your cables. Use a M16 cable gland in each of the two outer holes and pass the cable for the rain gauge through one and the cable for the wind sensors through the other.
 
+- If you're using the ethernet cable to provide wired network access for your weather station, you may need to use a larger gland or an extra one of the holes in the enclosure.
+
 ![](images/three_glands.jpg)
 
 - Then use the larger M20 gland for the centre hole and feed the power cable, DS18B20 probe and the wires for the BME280 through.
 
 ![](images/glands.jpg)
 
-- The hole will need 'padding' with tape to tightly hold the cables but needs to accommodate  the Micro USB connector for the power cable. A 3D printable grommet is available here - use two rotated at 180 degrees to each other so that there is no gap all the way through.
+- The hole in the M20 is quite large and so you should pad the cables to ensure a tight fit (if you use a smaller gland then the Micro USB connector for the power cable would not be able to pass through). A 3D printable grommet is available here - use two rotated at 180 degrees to each other so that there is no gap all the way through.
 
 - The larger box can be installed inside. This makes it much easier to keep dry, and allows easier connection to power and networking. However, the various cables for the external sensors (rain gauge, wind vane and anemometer and BME280) all need to be routed inside so this may involve a bigger hole in an external wall. Mounting everything outside means you only have to supply power to the weather station (assuming you are using wifi for data transfer).
+
+Now you're ready to install your weather station outside. You could mount your stations on a wall, rooftop, fences, and even on plumbing pipes stuck in the ground. As long as the sensors are open to the elements, any location is fine. Don't forget:
+
+- The rain gauge needs to collect rain
+- The anemometer and wind vane need to be in the wind
+- The smaller BME280 box needs to breathe - try to avoid situating it in direct sunlight.
+- The Weather Station needs to be connected to power and your network via an Ethernet cable or WiFi.
+
+It is not possible to provide specific instructions for siting the Station as the exact method will depend on your particular location. and environment. However, here are some tips for a couple of aspects of the process that should help you get started.
+
+[Installing your Weather Station outside: wind sensors](https://www.raspberrypi.org/learning/weather-station-guide/outside1.md)
+
+[Installing your Weather Station outside: connecting to Wifi](https://www.raspberrypi.org/learning/weather-station-guide/outside2.md)
+
+You may not be able to find an ideal location. Perhaps trees block the wind, or the rain gauge is partially sheltered by an overhang. Don't worry! Install your Weather Station anyway! You could even use this as a learning opportunity: would it be possible, for example, to take reduced rain readings into account automatically? If airflow around the BME280 is limited, could you add in a small fan?
 
 ## Share your design
 
