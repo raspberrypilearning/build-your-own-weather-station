@@ -13,8 +13,7 @@ There are many ways of doing this with Python. One approach is to treat the sens
 
 - Consumer anemometers normally have two wires. Connect one to a ground pin and the other to GPIO5. If you're using the RJ11 connectors, the anemometer uses the middle two wires of the cable, which are normally pins 3 & 4 for on RJ11 breakout boards.
 
-![](images/anemometerwires.JPG)
-![](images/RJ11-anemomter1.JPG)
+![](images/RJ11-anemometer1.JPG)
 
  With the anemometer added, your circuit should look like this:
 
