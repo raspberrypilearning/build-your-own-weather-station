@@ -6,7 +6,7 @@ Now that you've tested all the sensors individually, it's time to set up the sof
 
 The original Oracle Weather Station adopts a Unix daemon approach to running the software, and you can adapt that code to run your custom build. The GPIO connections you've been using so far match those expected by this software so a slightly modified version of the code will work, and you've already used the original Oracle Weather Station code for the DS18B20 digital thermal probe.
 
-To complete your custom Weather Station, you can also adapt and amalgamate the code you've written for testing to to regularly measure and record
+To complete your custom Weather Station, you can also adapt and integrate the code you've written for testing to regularly measure and record
 
 ### Wind speed, gusts and direction
 
@@ -51,11 +51,11 @@ while True:
         reset_wind()
         #time.sleep(wind_interval)
         while time.time() - wind_start_time <= wind_interval:
-                store_directions.append(wind_direction_byo2.get_value())
+                store_directions.append(wind_direction_byo.get_value())
 
         final_speed = calculate_speed(wind_interval)
         store_speeds.append(final_speed)
-    wind_average = wind_direction_byo2.get_average(store_directions)
+    wind_average = wind_direction_byo.get_average(store_directions)
 
     wind_gust = max(store_speeds)
     wind_speed = statistics.mean(store_speeds)
@@ -90,11 +90,11 @@ while True:
         reset_wind()
         #time.sleep(wind_interval)
         while time.time() - wind_start_time <= wind_interval:
-                store_directions.append(wind_direction_byo2.get_value())
+                store_directions.append(wind_direction_byo.get_value())
 
         final_speed = calculate_speed(wind_interval)
         store_speeds.append(final_speed)
-    wind_average = wind_direction_byo2.get_average(store_directions)
+    wind_average = wind_direction_byo.get_average(store_directions)
 
     wind_gust = max(store_speeds)
     wind_speed = statistics.mean(store_speeds)
@@ -133,11 +133,11 @@ while True:
         reset_wind()
         #time.sleep(wind_interval)
         while time.time() - wind_start_time <= wind_interval:
-                store_directions.append(wind_direction_byo2.get_value())
+                store_directions.append(wind_direction_byo.get_value())
 
         final_speed = calculate_speed(wind_interval)
         store_speeds.append(final_speed)
-    wind_average = wind_direction_byo2.get_average(store_directions)
+    wind_average = wind_direction_byo.get_average(store_directions)
 
     wind_gust = max(store_speeds)
     wind_speed = statistics.mean(store_speeds)
@@ -211,11 +211,11 @@ while True:
         reset_wind()
         #time.sleep(wind_interval)
         while time.time() - wind_start_time <= wind_interval:
-                store_directions.append(wind_direction_byo2.get_value())
+                store_directions.append(wind_direction_byo.get_value())
 
         final_speed = calculate_speed(wind_interval)
         store_speeds.append(final_speed)
-    wind_average = wind_direction_byo2.get_average(store_directions)
+    wind_average = wind_direction_byo.get_average(store_directions)
     wind_gust = max(store_speeds)
     wind_speed = statistics.mean(store_speeds)
     rainfall = rain_count * BUCKET_SIZE
@@ -253,7 +253,7 @@ from gpiozero import Button
 import time
 import math
 import bme280_sensor
-import wind_direction_byo2
+import wind_direction_byo
 import statistics
 import ds18b20_therm
 import database
@@ -324,11 +324,11 @@ while True:
         reset_wind()
         #time.sleep(wind_interval)
         while time.time() - wind_start_time <= wind_interval:
-                store_directions.append(wind_direction_byo2.get_value())
+                store_directions.append(wind_direction_byo.get_value())
 
         final_speed = calculate_speed(wind_interval)# Add this speed to the list
         store_speeds.append(final_speed)
-    wind_average = wind_direction_byo2.get_average(store_directions)
+    wind_average = wind_direction_byo.get_average(store_directions)
     wind_gust = max(store_speeds)
     wind_speed = statistics.mean(store_speeds)
     rainfall = rain_count * BUCKET_SIZE
@@ -445,7 +445,7 @@ You may see warning messages about truncated values, but these can be safely ign
 
 - Run the code for a while to allow it to record several values (you can always adjust the value of the variable `interval` to a smaller number if you're impatient and don't want to wait 5 minutes in between each iteration).
 
-- Check that no errors are produced (except for the warnings about truncated values).
+- Check that no errors are produced (except for the warnings about truncated values - you can ignore these).
 
 - Open a Terminal Window and connect the the MariaDB database:
 

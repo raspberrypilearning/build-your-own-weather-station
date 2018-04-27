@@ -1,6 +1,6 @@
 ## What you will need
 
-There are many different sensors available that you could use to make weather measurements. You don't have to use the exact same hardware to build your weather station, however if you choose different components you will need to also find (or write) a Python library that works with it.
+There are many different sensors available that you could use to make weather measurements. You don't have to use the exact same hardware that is described here to build your weather station, however if you choose different components you will probably need to also find (or write) a Python library that works with it.
 
 The specific sensors and components here were chosen after considering a number of factors:
 - Availability
@@ -10,7 +10,11 @@ The specific sensors and components here were chosen after considering a number 
 - Accuracy
 - Ease of use
 
-First of all you will develop and build a prototype weather station using a breadboard and jumper wires. Once everything is running and you've tested it, you can turn this prototype into a more robust form so that it can be deployed outside and be relatable in the long term.
+This does not mean that the components chosen are the cheapest, most accurate and easiest to use. Rather they are balanced selection across all factors. For example,  in some cases accuracy has been sacrificed in favour of ease of use.
+
+When selecting the components for your weather station, you should make choices based on what is most important for your particular project. We always like to hear about alternative builds, so please post your designs in the Weather Station forum.
+
+
 
 ### Hardware
 
@@ -23,7 +27,7 @@ First of all you will develop and build a prototype weather station using a brea
 + [An anemometer, wind vane and rain gauge](https://www.argentdata.com/catalog/product_info.php?products_id=145){:target="_blank"}
 + Two RJ11 breakout boards (optional)
 + An MCP3008 Analogue to digital Convertor Integrated Circuit.
-+ Weatherproof enclosures. Recommended products are this [75x75x37mm](http://cpc.farnell.com/spelsberg/332-907/universal-junc-box-7-entry/dp/EN81013){:target="_blank"} box for the BME280 and this larger [150x110x70mm](http://cpc.farnell.com/olan/ol20112/box-ip55-glanded-150x110x70mm/dp/EN82191){:target="_blank"} box for the Pi and a soldered HAT. If you're going to stick with a less durable breadboard-only solution then you may need a larger enclosure such as this [190x140x70mm one] (http://cpc.farnell.com/olan/ol20013/box-ip55-glanded-190x140x70mm/dp/EN82192){:target="_blank"}
++ Weatherproof enclosures. Recommended products are this [75x75x37mm](http://cpc.farnell.com/spelsberg/332-907/universal-junc-box-7-entry/dp/EN81013){:target="_blank"} box for the BME280 and this larger [150x110x70mm](http://cpc.farnell.com/olan/ol20112/box-ip55-glanded-150x110x70mm/dp/EN82191){:target="_blank"} box for the Pi and a soldered HAT. If you're going to stick with a less durable breadboard-only solution then you may need a larger enclosure such as this [190x140x70mm one](http://cpc.farnell.com/olan/ol20013/box-ip55-glanded-190x140x70mm/dp/EN82192){:target="_blank"}
 
 
 ### Software
@@ -38,7 +42,6 @@ git clone https://github.com/RaspberryPiFoundation/weather-station
 sudo pip3 install RPi.bme280
 ```
 + The MariaDB database server software.
-
 ```bash
 sudo apt-get install -y mariadb-server mariadb-client libmariadbclient-dev
 sudo pip3 install mysqlclient
@@ -46,7 +49,7 @@ sudo pip3 install mysqlclient
 
 ### Additional Resources
 
-If you are going to construct a permanent Weather HAT for your Pi you will also need:
+If you are going to construct a permanent Weather HAT for your Pi you may also need:
 + Soldering iron, solder and safety equipment
 + Solid core wire (22 AWG)
 + An [Adafruit Perma-Proto HAT for Pi Mini Kit](https://www.adafruit.com/product/2310){:target="_blank"}
@@ -54,3 +57,4 @@ If you are going to construct a permanent Weather HAT for your Pi you will also 
 + Two 2-pin male headers
 + General prototyping tools: Side-cutters, wire strippers. screwdrivers etc
 + Insulating tape
++ Access to a 3D printer or 3D printing service.

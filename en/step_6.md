@@ -11,7 +11,12 @@ At two points within the magnet's rotation, it triggers a reed switch which prod
 
 There are many ways of doing this with Python. One approach is to treat the sensor like a Button and then use the `gpiozero` library to count the number of times it has been 'pressed'.
 
-- Consumer anemometers normally have two wires. Connect one to a ground pin and the other to GPIO5. If you're using the RJ11 connectors, the anemometer uses the middle two wires of the cable, which are normally pins 3 & 4 for on RJ11 breakout boards. With the anemometer added, your circuit should look like this:
+- Consumer anemometers normally have two wires. Connect one to a ground pin and the other to GPIO5. If you're using the RJ11 connectors, the anemometer uses the middle two wires of the cable, which are normally pins 3 & 4 for on RJ11 breakout boards.
+
+![](images/anemometerwires.JPG)
+![](images/RJ11-anemomter1.JPG)
+
+ With the anemometer added, your circuit should look like this:
 
 ![](images/wind_speed_bb.png)
 
@@ -76,7 +81,7 @@ wind_count = 17
 circumference_cm = (2 * math.pi) * radius_cm
 rotations = count / 2.0
 dist_cm = circumference_cm * rotations
-speed = dist_cm / interval
+speed = dist_cm / wind_interval
 
 print(speed)
 ```
@@ -97,7 +102,7 @@ wind_interval = 5    # How often (secs) to report speed
 
 ---/hint---
 ---hint---
-Then create a new function to handle the calculation. This should take the time period of the measurement as an input and use the formula above to work out the speed.
+Then create a new function to handle the calculation. This should take the time period of the measurement (in seconds) as an input and use the formula above to work out the speed.
 
 ```python
 def calculate_speed(time_sec):
@@ -131,7 +136,7 @@ def spin():
 	# print("spin" + str(wind_count))
 
 # Calculate the wind speed
-def calculate_speed(interval):
+def calculate_speed(time_sec):
         global wind_count  
         circumference_cm = (2 * math.pi) * radius_cm        
         rotations = wind_count / 2.0
@@ -139,13 +144,13 @@ def calculate_speed(interval):
         # Calculate distance travelled by a cup in cm
         dist_cm = circumference_cm * rotations
 
-        speed = dist_cm / wind_interval
+        speed = dist_cm / time_sec
 
         return speed
 
 
 wind_speed_sensor = Button(5)
-wind_speed_sensor.when_activated = spin
+wind_speed_sensor.when_pressed = spin
 
 # Loop to measure wind speed and report at 5-second intervals
 while True:
@@ -181,14 +186,14 @@ SECS_IN_AN_HOUR = 3600
 ---hint---
 Your new `calculate_speed` function should look like this:
 ```python
-def calculate_speed(interval):
+def calculate_speed(time_sec):
     global wind_count
     circumference_cm = (2 * math.pi) * radius_cm
     rotations = wind_count / 2.0
 
     dist_km = (circumference_cm * rotations) / CM_IN_A_KM
 
-    km_per_sec = dist_km / wind_interval
+    km_per_sec = dist_km / time_sec
     km_per_hour = km_per_sec * SECS_IN_AN_HOUR
 
     return km_per_hour
@@ -239,7 +244,7 @@ def calculate_speed(time_sec):
 - You'll need to alter the final `print` line of your code so that it now shows the output in the correct units.
 - Re-run the code and this time you should get a value closer to 2.4.
 
-- It will be useful to be able to reset our `wind_count` variable to zero, so now add a function that does that.
+- When we assemble the complete weather station it will be useful to be able to reset our `wind_count` variable to zero, so now add a function that does that now:
 
 ```python
 def reset_wind():

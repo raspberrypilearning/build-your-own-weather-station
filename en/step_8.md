@@ -49,7 +49,7 @@ So by varying the values of R1 and R2, you can reduce the input voltage Vin down
 To start off, create a function definition that takes the 3 input values:
 
 ```python
-def voltage_divider(R1, R2, Vin):
+def voltage_divider(r1, r2, Vin):
 ```
 ---/hint---
 ---hint---
@@ -72,7 +72,12 @@ def voltage_divider(r1,r2,vin):
 ---/hint---
 ---/hints---
 
-- Test your function to make sure it provides the right answer for a selection of input values. For example, when R1 = 33K, R2 = 10K and a reference voltage of 5v, the function should return an answer of 3.837v
+- Test your function to make sure it provides the right answer for a selection of input values. For example, when R1 = 33K, R2 = 10K and a reference voltage of 5v, the function should return an answer of 3.837v.
+
+```python
+print(voltage_divider(33000,10000,5.0))
+```
+
 
 Now returning to the circuit, if you imagine that R2 is actually some kind of variable resistor (a light dependent resistor for example), then by measuring Vout, we can calculate R2 as long as we know R1. The wind vane also acts like a variable resistor and so you can use a voltage divider circuit to measure its resistance value at any given time.
 
@@ -201,7 +206,7 @@ while True:
 
 ![](images/vane_test3.png)
 
-- Modify your code to include a list of the possible correct values and check each reading from the ADC against this list. Have your code print a helpful message for each reading that indicates whether it was one of the correct values or not. 
+- Modify your code to include a list of the possible correct values and check each reading from the ADC against this list. Have your code print a helpful message for each reading that indicates whether it was one of the correct values or not.
 
 ---hints---
 ---hint---
@@ -350,7 +355,7 @@ def get_average(angles):
 import math
 ```
 
-- Now, using a similar technique to how you checked for wind gusts in the previous step, modify your program so that in has a function *get_value()* that returns the average value for a given time period.
+- Now, using a similar technique to how you checked for wind gusts in the previous step, modify your program so that in has a function *get_value()* that returns the average value for a given time period. This will make it easy to call this function from within your complete weather station code. 
 
 ---hints---
 ---hint---

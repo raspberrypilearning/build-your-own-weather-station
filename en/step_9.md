@@ -63,7 +63,7 @@ count = 0
 
 def bucket_tipped():
     global count
-    count = count + 1
+    count = +=1
     print(count)
 
 rain_sensor.when_pressed = bucket_tipped

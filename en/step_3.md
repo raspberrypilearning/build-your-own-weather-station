@@ -1,6 +1,6 @@
 ## Humidity, Temperature and pressure
 
-The BME280 sensor is a digital sensor that can measure temperature, humidity and atmospheric pressure. It is available in a number of breakout boards from popular manufacturers such as Adafruit and Sparkfun. This guide assumes you have the Adafruit package, but the instructions should be applicable to most versions.
+The BME280 sensor is a digital sensor that can measure temperature, humidity and atmospheric pressure. It is available in a number of breakout boards from popular manufacturers such as Adafruit and Sparkfun. This guide assumes you have the Adafruit package, but the instructions should be applicable to most versions. One thing to check is that the I2C address is correct: for the Adafruit models it is 0x77 (as shown in the code below) but other versions can have different addresses (0x76 is a common alternative)
 
 ### Wiring up the sensor
 
@@ -30,7 +30,7 @@ import smbus2
 from time import sleep
 
 port = 1
-address = 0x76
+address = 0x77 # Adafruit BME280 address. Other BME280s may be different
 bus = smbus2.SMBus(port)
 
 bme280.load_calibration_params(bus,address)

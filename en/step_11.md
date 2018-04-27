@@ -1,6 +1,6 @@
 ## Assembling everything ready for outdoors
 
-In order for your weather station to be able to upload data to somewhere that you can view and analyses it, it will need some form of Internet connection. Using wifi is typically the easiest way to do this but you can use the ethernet connection if that works better for your location.  You can find guides on setting up wireless connectivity on your Raspberry Pi [here](https://www.raspberrypi.org/documentation/configuration/wireless/) and there are some special hints for getting wifi access working with a weather station [here](https://www.raspberrypi.org/learning/weather-station-guide/outside2.md).
+In order for your weather station to be able to upload data to somewhere that you can view and analyse it, it will need some form of Internet connection. Using wifi is typically the easiest way to do this but you can use the ethernet connection if that works better for your location.  You can find guides on setting up wireless connectivity on your Raspberry Pi [here](https://www.raspberrypi.org/documentation/configuration/wireless/) and there are some special hints for getting wifi access working with a weather station [here](https://www.raspberrypi.org/learning/weather-station-guide/outside2.md).
 
 You should now have working weather station prototype on breadboard. If you are happy keeping your weather station in this form then you skip ahead to the *Keeping your weather station dry* section.
 
@@ -8,13 +8,15 @@ You should now have working weather station prototype on breadboard. If you are 
 
 For a more robust, long term installation, or if you don't have room for a breadboard in your enclosure, you can construct a weather station HAT for your Pi. This will involve some soldering, but don't worry if you've never soldered before - there is a [great blog post and movie](https://www.raspberrypi.org/blog/getting-started-soldering/) to get you up to speed.
 
-As usual, there is more than one way to achieve this. You could design a layout for stripboard (also known as veroboard)
+If you are going to solder up your project using the recommended components, make sure you read through all the instructions before starting. Assembly can be quite tricky and will typically take 2-4 hrs, even for an experienced Maker.
+
+As usual, there is more than one way to achieve this. You could design a layout for stripboard (also known as veroboard).
 
 ![](https://upload.wikimedia.org/wikipedia/commons/5/50/VEROBOARD_sample.jpg)
 
 Soldering stripboard connections can be trickier than the 'through-hole' type you may be familiar with from assembling other digital Making kits. However, prototyping HATs for Raspberry Pi are also available and these have Plated Through Holes (PTH) connections that are much easier tow work with.
 
-The circuit diagram below shows a possible design for a weather station HAT using the Adafruit Perma-Proto HAT kit.
+The circuit diagram below shows a possible design for a weather station HAT using the Adafruit Perma-Proto HAT kit. You can lay things out differently if you have used alternative components.
 
 ![](images/final_circuit_strip_bb.png)
 
@@ -45,7 +47,7 @@ You are recommended to assemble and test things one step at a time, checking eac
 
 ![](images/ada_2.png)
 
-Next, add connections for the  DS18B20 probe. You can be sneaky and make use of the unused screw terminals on one of the RJ11 breakout boards: the rainfall gauge only uses the two centre pins of the connector so the 2 outer on either side are free.
+Next, add connections for the  DS18B20 probe. On the breadboard you used screw terminals. You could use them again on the Proto-board but you may have noticed that one of the RJ11 breakout boards has some unused pins. You can be sneaky and make use of the unused screw terminals to save space: the rainfall gauge only uses the two centre pins of the connector so the 2 outer on either side are free.
 
 - Power off the Pi and remove the HAT.
 
@@ -74,7 +76,7 @@ The connection to 3V will pass through a 'busy' part of the board if it goes ove
 ![](images/RJ11_breakout_pins.jpg)
 
 
-- Solder the RJ11 breakout board in place, making sure that the pins slot into the correct place on the Adafruit board. The pins from the breakout board are quite long and will make contact with the HDMI port on the Raspberry Pi when the HAT is in place. Therefore you should either trim them or use some insulating tape on the top of the HDMI port to prevent shorting.
+- Solder the RJ11 breakout board in place, making sure that the pins slot into the correct place on the Adafruit board.  Be careful not to melt the plastic on the RJ11 socket. The pins from the breakout board are quite long and will make contact with the HDMI port on the Raspberry Pi when the HAT is in place. Therefore you should either trim them or use some insulating tape on the top of the HDMI port to prevent shorting.
 
 - Connect the DS18B20 to the screw terminals on the breakout board as shown below.
 
@@ -133,8 +135,11 @@ This is really important. If the Pi or any of the electronics gets wet or even v
 - Most commercial enclosures will have holes for routing cables, some with grommets that help keep out moisture. Alternatively you can cut or drill your own holes and use grommets and sealing glands around the cables.
 
 - If you're using the recommended enclosures as listed in "What you will need", then you can use these 3D printable mounts to secure the Raspberry Pi inside the larger box and the BME280 into the smaller one.
+The BME280 bracket should just slot in.
 
 ![](images/bme280_bracket.jpg)
+
+Use short self-tapping screws to secure the mounts into the holes and/or grooves at the back of the larger box.
 
 ![](images/big_box_bracket.jpg)
 
