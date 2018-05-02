@@ -1,6 +1,6 @@
-title: build-your-own-weather-station
+title: Build your own Weather Station
 hero_image: images/banner.png
-description: build-your-own-weather-station description
+description: Learn how to build your own weather station
 theme: red # possible values: blue, green, navy, orange, red, turquoise, violet, yellow
 duration: 3
 listed: false
@@ -14,7 +14,7 @@ hardware: electronic-components
 software: python
 version: 3
 last_tested: 2017-01-01
-steps: 
+steps:
 - title: Introduction
 - title: What you will need
 - title: Humidity & temperature
