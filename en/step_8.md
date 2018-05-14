@@ -3,7 +3,7 @@
 ### Wind vanes
 Wind vanes show the direction the wind is coming from, not where it's going. This can be a little confusing in the beginning, because the arrows on most TV weather maps show the opposite. A wind vane works because wind exerts force on its vertical blade, which rotates to find the position of least wind resistance; this position is aligned with the direction of the oncoming wind.
 
-### How our wind vane works
+### How your wind vane works
 Like the rain gauge or anemometer, the wind vane used here also has reed switches and a rotating magnet, but it is more complex and works in a completely different way.
 
 If you look inside the recommended wind vane, you'll see eight reed switches arranged like the spokes of a wheel.
