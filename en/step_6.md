@@ -4,7 +4,13 @@ A typical anemometer has three arms with scoops on the end that catch the wind a
 
 ![](images/anemometer_with_magnet.png)
 
-At two points within the magnet's rotation, it triggers a reed switch which produces a signal we can detect via a GPIO pin. So for each full rotation of the arms, the sensor will produce two detectable signals. By counting and timing these signals, you can calculate the speed of the wind.
+At two points of the magnet's rotation, it triggers a clever piece of electronics called a **reed switch**, pictured below.
+
+![](images/reed_switch.jpg)
+
+The reed switch has two metal contacts inside it that contact each other when under the influence of a magnet. Therefore, electronically, this switch works in exactly the same way as a button connected to the Raspberry Pi: when the anemometer spins, its magnet passes the reed switch, causing it to form a closed circuit momentarily. Therefore, you can use the number of signals from the reed switch to calculate how fast the anemometer spins.
+
+Whenever the reed switch is triggered, it produces a signal you can detect via a GPIO pin. For each full rotation of the anemometer, the sensor will produce two detectable signals. By counting and timing these signals, you can calculate the speed of the wind.
 
 ![](images/anemometer_reed.png)
 
