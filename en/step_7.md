@@ -1,28 +1,28 @@
 ## Wind gusts
 
-Weather reports and forecasts will normally report the wind speed along with wind gust information.
+Weather reports and forecasts will normally report the wind speed along with wind gust information. A wind gust is a brief increase in wind speed that can occur whenever the wind is blowing. Gusts are more noticeable as the wind speed increases. This is because the force exerted by the wind increases rapidly as the wind speed increases.
 
-A wind gust is a brief increase in wind speed that can occur whenever the wind is blowing. Gusts are more noticeable as the wind speed increases. This is because the force exerted by the wind increases rapidly as the wind speed increases.  Gusts normally occur because the air is not able to move along the ground at a constant speed. Obstacles such as  from vegetation, buildings and elevation changes causes surface friction  which will slow the wind down in some places more than others. Air closer to the ground is suffers from this phenomenon more b than air which is higher up. This creates a more turbulent wind flow along the ground which leads to gusts. A typical wind gust lasts less than 20 seconds.
+Gusts normally occur because the air is not able to move along the ground at a constant speed. Obstacles such as vegetation, buildings, and elevation changes causes surface friction, which will slow the wind down in some places more than others. Air closer to the ground suffers from this phenomenon more than air higher up. This creates a more turbulent wind flow along the ground, which leads to gusts. A typical wind gust lasts less than 20 seconds.
 
 ### Storing wind readings
 
-When your Weather Station is fully operational, you can record the maximum wind speed during a given period (the gust) as well as the average speed. You can do this by constantly taking wind speed measurements for 5 seconds, and temporarily storing them for processing every few minutes. To do this we will use a Python data structure called a list.
+When your weather station is fully operational, you can record the maximum wind speed during a given period (the gust) as well as the average speed. You can do this by constantly taking wind speed measurements for five seconds, and temporarily storing them to be processed every few minutes. To do this, we will use a Python data structure called a **list**.
 
-- Open Idle and the open file your `/home/pi/weather-station/wind.py` file that you created in the last step.
+- Open IDLE, and open the file `/home/pi/weather-station/wind.py` file that you created in the last step.
 
-- Add a line at the very top to import the *statistics* library.
+- Add a line at the very top to import the `statistics` library.
 
 ```python
 import statistics
 ```
 
-- Then add this line, which creates an empty list, after the `import` lines at the top.
+- Then add this line, which creates an empty list called `store_speeds`, below the `import` lines:
 
 ```python
 store_speeds = []
 ```
 
-- Now modify the `while True` loop so that it contains a sub-loop that continually takes wind speed readings, and adds them to this list. You can then use `statistics.mean` to calculate the mean value. 
+- Now modify the `while True` loop so that it contains a sub-loop that continually takes wind speed readings and adds them to this list. You can then use `statistics.mean` to calculate the mean value of readings in the `store_speeds` list. 
 
 ```python
 while True:
@@ -45,4 +45,4 @@ Notice that we're using `time.time()` to create a variable called `start_time` a
 
 ![](images/gust_test.png)
 
-If you stop spinning you should see that the second reading remains the same (as this is the peak gust that has been produced) while the average speed falls off with time.
+When you stop spinning, you should see that the second reading remains the same (as this is the peak gust that has been produced), while the average speed falls off over time as the anemometer slows down.
