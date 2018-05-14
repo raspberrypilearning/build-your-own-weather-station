@@ -1,8 +1,8 @@
 # Wind direction
 
-A wind vane shows the direction from which the wind is coming, not where it's going; this can be confusing because the arrows on TV weather maps show the opposite. It works by the wind exerting force on a vertical blade which rotates to find the position of least resistance; this position is then aligned with the direction of the oncoming wind.
+Wind vanes show the direction from which the wind is coming, not where it's going. This can be confusing, because the arrows on most TV weather maps show the opposite. A wind vane works by the wind exerting force on its vertical blade, which rotates to find the position of least wind resistance; this position is aligned with the direction of the oncoming wind.
 
-The wind vane is more complex than the rain gauge or anemometer. It does use reed switches and a rotating magnet, but it works in a completely different way.
+Like the rain gauge or anemometer, the wind vane used here also has reed switches and a rotating magnet, but it is more complex and works in a completely different way.
 
 If you look inside the recommended wind vane, you'll see there are eight reed switches arranged like the spokes of a wheel.
 
@@ -10,15 +10,15 @@ If you look inside the recommended wind vane, you'll see there are eight reed sw
 
 There are also eight resistors in the wind vane, and as the magnet rotates, different reed switches will open and close and thus switch their corresponding resistor in and out of the circuit.
 
-Resistors are small components that resist/reduce the flow of electrical current but don't stop it.  Resistors can have different values; a low resistance value would let almost all current through, but a high resistance value would let very little through. The most common uses for resistors are to protect components from being damaged by too high a current, and to divide the voltage between different parts of a circuit.
+Resistors are small components that resist/reduce the flow of electrical current but don't stop it. Resistors can have different values; those with low resistance let almost all current through, but those with high resistance let very little through. The most common uses for resistors are to protect components from being damaged by currents that are too high, or to divide the voltage between different parts of a circuit.
 
-Each of the eight resistors have different values which you should see printed in white text next to them (e.g. you can see 8.2K on the right). This allows the wind vane to have 16 possible combinations of resistance, since the magnet is able to close two reed switches when halfway between them. More information can be found in the [datasheet](https://www.argentdata.com/files/80422_datasheet.pdf).
+Each of the eight resistors has a different value, which you should see printed in white next to them (e.g. you can see 8.2K on the right). This allows the wind vane to have 16 possible combinations of resistance, since the magnet is able to close two reed switches when halfway between them. More information can be found in the [data sheet](https://www.argentdata.com/files/80422_datasheet.pdf).
 
-Most wind vanes work in a similar way, so if you have a different model, consult its datasheet to find the values for the resistors.
+Most wind vanes you can connect to a Pi work in a similar way, so if you have a different model, consult its data sheet to find the values for the resistors.
 
 In order to read the wind direction from the vane, you'll need to be able to measure the resistance produced by the sensor and convert that into an angle value. There are several steps in this process.
 
-Instead of measuring the resistance value directly, it is actually much easier to record a voltage from the wind vane which varies according to which combination of resistors is currently being switched into the circuit. This is an *analogue* signal because it continuously reports a **range** of voltages. Compare this to the anemometer which simply reported a `HIGH` or `LOW` voltage, all or nothing, which is a *digital* signal.
+Instead of measuring the resistance value directly, it is actually much easier to record a voltage from the wind vane that varies according to which combination of resistors is currently being switched into the circuit. This is an **analogue** signal, because it continuously reports a **range** of voltages. Compare this to the anemometer, which simply reported a 'HIGH' or 'LOW' voltage, all or nothing — this is a **digital** signal.
 
 [[[generic-theory-analogue-digital]]]
 
