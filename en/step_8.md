@@ -1,4 +1,4 @@
-# Wind direction
+## Wind direction
 
 ### Wind vanes
 Wind vanes show the direction the wind is coming from, not where it's going. This can be a little confusing in the beginning, because the arrows on most TV weather maps show the opposite. A wind vane works because wind exerts force on its vertical blade, which rotates to find the position of least wind resistance; this position is aligned with the direction of the oncoming wind.
