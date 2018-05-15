@@ -138,7 +138,7 @@ This is really important. If the Pi or any of the electronics gets wet or even v
 
 - Most commercial enclosures will have holes for routing cables, some with grommets that help keep out moisture. Alternatively, you can cut or drill your own holes and use grommets and sealing glands around the cables.
 
-- If you're using the recommended enclosures as listed in the _What you will need_ section, then you can use these 3D-printable mounts to secure the Raspberry Pi inside the larger box and the BME280 sensor into the smaller one. The BME280 bracket should just slot in.
+- If you're using the recommended enclosures as listed in the _What you will need_ section, then you can use  3D-printable mounts to [secure the Raspberry Pi inside the larger box](resources/BYOWS-bracket.stl){:target="_blank"}. and the [BME280 sensor into the smaller one](resources/bme280holder.stl){:target="_blank"}.. The BME280 bracket should just slot in.
 
 ![](images/bme280_bracket.jpg)
 
@@ -162,7 +162,7 @@ This is really important. If the Pi or any of the electronics gets wet or even v
 
 ![](images/glands.jpg)
 
-- The hole in the M20 is quite large, so you should pad the cables to ensure a tight fit (if you use a smaller gland, then the micro USB connector for the power cable would not be able to pass through). A 3D-printable grommet is available here — use two rotated at 180 degrees to each other so that there is no gap all the way through.
+- The hole in the M20 is quite large, so you should pad the cables to ensure a tight fit (if you use a smaller gland, then the micro USB connector for the power cable would not be able to pass through). A 3D-printable grommet is available [here](resources/BYOWS-grom.stl){:target="_blank"}. — use two rotated at 180 degrees to each other so that there is no gap all the way through.
 
 - The larger box can be installed inside, making it much easier to keep it dry, and allowing easier connection to power and networking. However, the various cables for the external sensors (rain gauge, wind vane, anemometer, and BME280) all need to be routed inside so this may involve a bigger hole in an external wall. Mounting everything outside means you only have to supply power to the weather station (assuming you are using wireless connectivity for data transfer).
 
