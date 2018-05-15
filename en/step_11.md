@@ -138,7 +138,7 @@ This is really important. If the Pi or any of the electronics gets wet or even v
 
 - Most commercial enclosures will have holes for routing cables, some with grommets that help keep out moisture. Alternatively, you can cut or drill your own holes and use grommets and sealing glands around the cables.
 
-- If you're using the recommended enclosures as listed in the _What you will need_ section, then you can use  3D-printable mounts to [secure the Raspberry Pi inside the larger box](resources/BYOWS-bracket.stl){:target="_blank"}. and the [BME280 sensor into the smaller one](resources/bme280holder.stl){:target="_blank"}.. The BME280 bracket should just slot in.
+- If you're using the recommended enclosures as listed in the _What you will need_ section, then you can use [this 3D-printable mount to secure the Raspberry Pi inside the larger box](resources/BYOWS-bracket.stl){:target="_blank"}. and [this one to hold BME280 sensor into the smaller one](resources/bme280holder.stl){:target="_blank"}.. The BME280 bracket should just slot in.
 
 ![](images/bme280_bracket.jpg)
 

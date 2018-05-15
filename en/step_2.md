@@ -55,4 +55,4 @@ If you are going to construct a permanent Weather HAT for your Pi, you may also 
 + Two 2-pin male headers
 + General prototyping tools: side-cutters, wire strippers. screwdrivers, etc.
 + Insulating tape
-+ Access to a 3D printer or 3D printing service
++ Access to a 3D printer or 3D printing service for these parts: [a mount to secure the Raspberry Pi inside the larger box](resources/BYOWS-bracket.stl){:target="_blank"}. and a [bracket to hold BME280 sensor into the smaller one](resources/bme280holder.stl){:target="_blank"}.
