@@ -1,20 +1,22 @@
 ## Fully functional weather station
 
-Now that you've tested all the sensors individually, it's time to set up the software so that you have a complete collection system.
+Now that you've tested all the sensors individually, it's time to set up the software so that you have a complete data collection system.
 
 ![](images/BYO_breadboard.JPG)
 
-The original Oracle Weather Station adopts a Unix daemon approach to running the software, and you can adapt that code to run your custom build. The GPIO connections you've been using so far match those expected by this software so a slightly modified version of the code will work, and you've already used the original Oracle Weather Station code for the DS18B20 digital thermal probe.
+The original Oracle Raspberry Pi Weather Station uses a Unix daemon approach to running the software, and the GPIO connections you've been using so far match those expected by this software. Therefore, you can adapt that code to run your custom build by only making slight modifications. In fact, you've already used the original Oracle Weather Station code for the DS18B20 digital thermal probe.
 
-To complete your custom Weather Station, you can also adapt and integrate the code you've written for testing to regularly measure and record
+To complete your custom weather station, you can also adapt and integrate the code you've written for testing to regularly measure and record data.
 
 ### Wind speed, gusts and direction
 
-The code you wrote for wind speed and gust measurement will form the basis of your overall Weather Station software.
+The code you wrote for wind speed and gust measurement will form the basis of your overall weather station software.
 
-Take a copy of your `wind.py` and call it `weather_station_BYO.py` (you can can do this in Idle by opening `wind.py` and then using *Save As*).
++ Make a copy of your `wind.py` script and call it `weather_station_BYO.py` (you can can do this in IDLE by opening `wind.py` and then clicking **Save as**).
 
-- You will need to add some additional libraries, some of the Oracle Weather Station code along with some of the programs you've already written. the top of your file should contain the following:
+You will need to add some additional libraries and some of the Oracle Weather Station code along with programs you've already written.
+
++ The top of your script should have the following `import` statements:
 
 ```python
 from gpiozero import Button
@@ -26,22 +28,22 @@ import statistics
 import ds18b20_therm
 
 ```
-As it currently stands, your code will continually record the wind speed every 5 seconds, keeping track of the largest measurement (gusts) and calculating the mean speed. You can extend this to also simultaneously measure wind direction.
+As it currently stands, your code will continually record the wind speed every five seconds, keeping track of the largest measurement (gusts) and calculating the mean speed. You can extend this to also simultaneously measure wind direction.
 
-- Modify your code so that instead of pausing for 5 seconds in each loop, the program takes 5 seconds worth of wind direction measurements.
+- Modify your code so that instead of pausing for five seconds in each loop, the program takes five seconds worth of wind direction measurements.
 
 ---hints---
 ---hint---
-You can use the same time.time() method to create a second sub-loop inside the first. Make sure you use a different variable name to store the starting time.
+You can use the same `time.time()` method to create a second sub-loop inside the first. Make sure you use a different variable name to store the starting time.
 ---/hint---
 ---hint---
-You can also use a list to store the wind direction readings just as you did for the wind speeds.
+You can also use a list to store the wind direction readings, just as you did for the wind speeds.
 ```python
 store_directions = []
 ```
 ---/hint---
 ---hint---
-Your modified function could look like this. You can use the `get_average` function you wrote to calculate this value from the list of measurements.
+Your modified function could look like the following. You can use the `get_average` function you wrote to calculate the average wind direction based on the list of measurements.
 
 ```python
 while True:
@@ -64,9 +66,11 @@ while True:
 ---/hint---
 ---/hints---
 
-- Test your code. Spin the anemometer and wind vane. Does the program produce sensible values.
+- Test your code by spinning the anemometer and wind vane. Does the program produce sensible values?
 
-- Currently your program is constantly updating the mean values and peak wind speed as new measurements are made. Your Weather Station should start afresh with each 5 seconds of measurement. Add two lines to your code to empty the lists that hold the wind speeds and directions after every pass through the loop.
+Right now your program is constantly updating the mean values and peak wind speed as new measurements are made. Your weather station should start afresh with each five seconds of measurement.
+
++ Add two lines to your code to empty the lists that hold the wind speeds and directions after every pass through the loop.
 
 ---hints---
 ---hint---
@@ -80,7 +84,7 @@ store_directions =[]
 ```
 ---/hint---
 ---hint---
-Your modified function could look like this.
+Your modified function could look like this:
 
 ```python
 while True:
@@ -105,11 +109,13 @@ while True:
 ---/hint---
 ---/hints---
 
-- Test your code again. You should see that you are recording the angular position of the wind vane, and counting the rotations of the anemometer for 5 seconds. Your code then calculates the mean wind speed and average position of the vane for that period. You will have also noticed that the value for wind gust is now always the same as the mean, because you are emptying the list of speeds after every 5 second period - so there is only ever 1 value (the last one).
+- Test your code again.
 
-Every 5 seconds is a nice sampling speed, but is too frequent to be storing new measurements.  A better period of measurement would be every 5 *minutes*. You can then store 5 minutes worth of of speeds and then record the peak value (gust) from that collection of measurements. That is much more useful!
+You should see that you are recording the angular position of the wind vane, and counting the rotations of the anemometer for five seconds. Your code then calculates the mean wind speed and average position of the vane for that period. You will have also noticed that the value for `wind_gust` is now always the same as the mean, because you are emptying the list of speeds after every five-second period — so there is only ever one value (the last one).
 
-- Modify the code so that it calculates new mean speeds and directions and records the strongest gust every 5 minutes, with a sampling frequency of 5 seconds.
+Five seconds is a nice sample period, but is too frequent if you want to **store** new measurements. To keep a permanent record, a better period of measurement would be every 5 **minutes**. You can collect five minutes worth of readings, and then record the peak value (gust) from that collection of measurements. That is much more useful!
+
+- Modify the code so that it uses a a sampling frequency of five seconds for its readings, and then calculates new mean speeds and wind directions and records the strongest gust every five minutes.
 
 ---hints---
 ---hint---
@@ -120,7 +126,7 @@ Create another variable called `interval` outside the main (`while True`) loop:
 ```python
 interval = 300
 ```
-5 x 60 seconds = 300
+5 * 60 seconds = 300
 ---/hint---
 ---hint---
 Then use that as the timing comparison for the outer timed loop:
@@ -147,15 +153,15 @@ while True:
 ```
 ---/hint---
 ---/hints---
-- Test your code. It should now report readings every 5 minutes. Simulate some wind activity by rotating the vane and anemometer and check that your measurements are what you'd expect.
+- Test your code. It should now report readings every five minutes. Simulate some wind activity by rotating the vane and anemometer and check that your measurements are what you'd expect.
 
-Now you can add the other sensors into this 5 minute loop.
+Now you can add the other sensors into this five-minute loop!
 
-## Rainfall
+### Rainfall
 
-Now you integrate the code your wrote for measuring rainfall  from `rainfall.py` into `weather_station_BYO.py` so that rainfall is measured for every 5 minutes and then the count reset.
+Integrate the code your wrote for measuring rainfall in `rainfall.py` into your `weather_station_BYO.py` program so that rainfall is measured for five-minute periods and then the count reset.
 
-- Add the bucket size constant definition to the list of other similar variables after the import lines.
+- Add the bucket size constant definition to the list of other similar variables after the `import` statements.
 
 ```python
 BUCKET_SIZE = 0.2794
@@ -178,18 +184,18 @@ rain_sensor = Button(6)
 rain_sensor.when_pressed = bucket_tipped
 ```    
 
-Then, after the lines which calculate the wind gusts and speed, add this code:
+Then, after the lines that calculate the wind gusts and speed, add this code:
 
 ```python
 rainfall = rain_count * BUCKET_SIZE
 reset_rainfall()
 ```
 
-## Temperature, Pressure and humidity
+### Temperature, pressure and humidity
 
-When you wrote the code for the BME280 pressure, temperature and humidity sensor, you created a `read_all` function to return all three measurements. You can call this function from within `weather_station_BYO.py` as you've included your `bme280_sensor` program as an imported library.
+When you wrote the code for the BME280 pressure, temperature, and humidity sensor, you created a `read_all` function to return all three measurements. You can call this function from within `weather_station_BYO.py` as you've included your `bme280_sensor` program as an imported library.
 
-- Modify your code so that the readings from the BME280 are also recorded every 5 minutes.
+- Modify your code so that the readings from the BME280 sensor are also recorded every five minutes.
 
 ---hints---
 ---hint---
@@ -201,7 +207,7 @@ humidity, pressure, ambient_temp = bme280_sensor.read_all()
 ```
 ---/hint---
 ---hint---
-Your completed loop code  for making measurements should look like this:
+Your completed loop code for making measurements should look like this:
 
 ```python
 while True:
@@ -230,7 +236,9 @@ while True:
 
 - Test your code. Exhale onto the BME280 and check that the readings change appropriately.
 
-- Now do the same thing for the ground temperature probe. Modify your code so that readings are collected every 5 minutes.
+### Ground temperature
+
+- Now do the same thing for the ground temperature probe. Modify your code so that readings are collected every five minutes.
 
 ---hints---
 ---hint---
@@ -246,7 +254,7 @@ You can use the `read_temp()` function.
 ---/hint---
 
 ---hint---
-Your completed code should look  like this:
+Your completed code should look like this:
 
 ```python
 from gpiozero import Button
@@ -348,19 +356,19 @@ while True:
 
 ## Storing measurements in a database
 
-One of the best ways to store your Weather data is in a database. Databases can store very large numbers of records efficiently and make it easier to sort, search and analyse your measurements.
+One of the best ways to store your weather data is in a database. Databases can store very large numbers of records efficiently and make it easier to sort, search, and analyse your data.
 
-There are many different choices of database software but MariaDb is a good, versatile general-purpose product. You should have already installed it - if not, head back to "What you will need" and follow the instructions there.
+There are many different pieces of database software, and MariaDB is a good, versatile general-purpose product. You should have already installed it — if not, head back to the _What you will need_ section and follow the instructions there.
 
 Now to configure the database.
 
-- The database server will already be running. To connect to it, open a Terminal Window and type:
+- The database server will already be running. To connect to it, open a terminal window and type:
 
 ```bash
 sudo mysql
 ```
 
-You should then see that the command line prompt changes to be `MariaDB [(none)]>`. You should type the configuration commands at this prompt.
+You should then see that the command line prompt changes to be `MariaDB [(none)]>`. Type the configuration commands at this prompt.
 
 ![](images/mariadb.png)
 
@@ -371,27 +379,27 @@ create user pi IDENTIFIED by 'my54cr4t';
 ```
 The command above will create a user named `pi` with the password `my54cr4t`.  
 
-- Assign all permission to this user.
+- Assign all permissions to this user.
 ```SQL
 grant all privileges on *.* to 'pi' with grant option;
 ```
 
 Remember to change `pi` to whatever username you created in the previous step.
 
-- You can have more than one database on a server. You're going to create one called `weather` to hold your data:
+- You can have more than one database on a server. Create one called `weather` to hold your data:
 
 ```SQL
 create database weather;
 ```
 
-- Your database should have a table called WEATHER_MEASUREMENT which will hold all of your records. First, select the weather database as the place where this table will be stored:
+- Your database should have a table called `WEATHER_MEASUREMENT` that will hold all of your records. First, select the weather database as the place where this table will be stored:
 
 ```SQL
 use weather;
 ```
-You should now see the prompt change to be `MariaDB [weather]>`.
+You should now see the prompt change to `MariaDB [weather]>`.
 
-- Create the WEATHER_MEASUREMENT table with fields to hold your weather data.
+- Create the `WEATHER_MEASUREMENT` table with fields to hold your weather data.
 
 ```SQL
 CREATE TABLE WEATHER_MEASUREMENT(
@@ -410,7 +418,7 @@ CREATED TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 PRIMARY KEY ( ID )
 );
 ```
-Now you can modify your `weather_station_BYO.py` program to record data in the database. Once again you can use code from the Oracle Raspberry Pi Weather Station software.
+Now you can modify your `weather_station_BYO.py` program to record data in this database. Once again you can use code from the Oracle Raspberry Pi Weather Station software.
 
 - Add this line to the top of `weather_station_BYO.py`:
 
@@ -422,7 +430,7 @@ import database
 ```python
 db = database.weather_database()
 ```
-- Then finally, under the line in the main `while True` loop that prints your data readings, add this line to insert a row of records into the database:
+- Then finally, below the line in the main `while True` loop that prints your data readings, add this line to insert a row of records into the database:
 
 ```python
 db.insert(ambient_temp, ground_temp, 0, pressure, humidity, wind_average, wind_speed, wind_gust, rainfall)
@@ -439,31 +447,31 @@ db.insert(ambient_temp, ground_temp, 0, pressure, humidity, wind_average, wind_s
 }
  ```
 
-## Test your weather_station_BYO.py.
+## Test your `weather_station_BYO.py` program
 
 You may see warning messages about truncated values, but these can be safely ignored.
 
-- Run the code for a while to allow it to record several values (you can always adjust the value of the variable `interval` to a smaller number if you're impatient and don't want to wait 5 minutes in between each iteration).
+- Run the code for a while to allow it to record several values (you can always adjust the value of the variable `interval` to a smaller number if you're impatient and don't want to wait five minutes in between each iteration).
 
-- Check that no errors are produced (except for the warnings about truncated values - you can ignore these).
+- Check that no errors are produced (except for the warnings about truncated values, which you can ignore).
 
-- Open a Terminal Window and connect the the MariaDB database:
+- Open a terminal window and connect the the MariaDB database:
 
 ```bash
 sudo mysql
 ```
-- Select the *weather* database:
+- Select the `weather` database:
 
 ```SQL
  use weather;
  ```
 
- - Then run this SQL query which will tell you how many rows are in the WEATHER_MEASUREMENT table:
+ - Then run this SQL query, which will tell you how many rows are in the `WEATHER_MEASUREMENT` table:
 
  ```SQL
  select count(*) from WEATHER_MEASUREMENT;
  ```
 
-This should display a number which matches the number of times your code has made a weather data measurement.
+This should display a number that matches the number of times your code has recorded a weather data measurement.
 
 ![](images/sql_count.png)
