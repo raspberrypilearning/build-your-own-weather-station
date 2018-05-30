@@ -6,11 +6,13 @@ So that your weather station can upload data to somewhere you can view and analy
 
 ### Make a weather station HAT
 
-You should now have a working weather station prototype on a breadboard. If you are happy keeping your weather station in this form, then scroll down to the *Keeping your weather station dry* section.
+You should now have a working weather station prototype on a breadboard. If you are happy keeping your weather station in this form, then click through to to the *Keeping your weather station dry* section.
 
 ![](images/breadboard_zoom.jpg)
 
 For a more robust, long-term installation, or if you don't have room for a breadboard in your enclosure, you can construct a weather station HAT (hardware attached on top) for your Pi. This will involve some soldering, and if you've never soldered before, we have a [great resource plus video tutorial](https://projects.raspberrypi.org/en/projects/getting-started-with-soldering) to get you started.
+
+Note that to really be able to call it a HAT, your board should include a programmed EEPROM. The Adafruit Perma-Proto HAT kit does come as a variant with an EEPROM so this is definitely something you could do, although we won't cover the procedure in this guide. A good place to start is this [github repository](https://github.com/raspberrypi/hats){:target="_blank"}, or this [MagPi article](https://www.raspberrypi.org/magpi/make-your-own-hat/){:target="_blank"}.
 
 If you are going to solder your project using the recommended components, make sure to read through all the instructions before starting. The assembly is a little tricky, and it will taken even an experienced maker two to four hours.
 
