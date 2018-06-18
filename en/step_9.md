@@ -45,7 +45,10 @@ rain_sensor = Button(6)
 ---hint---
 Create a function that is run whenever there's a bucket tip. You can assign a global variable as a counter to keep track of how many times the reed switch has been 'pressed'.
 ```python
-store_directions = []
+def bucket_tipped():
+    global count
+    count = +=1
+    print(count)
 ```
 ---/hint---
 ---hint---
