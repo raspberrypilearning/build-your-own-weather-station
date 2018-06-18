@@ -42,7 +42,7 @@ Voltage dividers are among the most fundamental circuits in electronics, and the
 
 In the circuit above, the output voltage `Vout` can be calculated using the formula:
 
-**`Vout = Vin * R2/R1 + R2`**
+**`Vout = Vin * R2/(R1 + R2)`**
 
 So by varying the values of `R1` and `R2`, you can reduce the input voltage `Vin` down to the output voltage `Vout`.
 
@@ -158,7 +158,7 @@ You should find that 4.7K ohms is a good value for the recommended wind vane.
 
 ![](images/wind_direction_bb.png)
 
-Reading values from an MCP3008 ADC is very easy, thanks to the `pgiozero` library.
+Reading values from an MCP3008 ADC is very easy, thanks to the `gpiozero` library.
 
 ```Python
 from gpiozero import MCP3008
@@ -372,7 +372,7 @@ def get_average(angles):
 import math
 ```
 
-- Now, using a similar technique to how you checked for wind gusts in the previous step, modify your program so that in has a function `get_value()` that returns the average value for a given time period. This will make it easy to call this function from within your complete weather station code. 
+- Now, using a similar technique to how you checked for wind gusts in the previous step, modify your program so that in has a function `get_value()` that returns the average value for a given time period. This will make it easy to call this function from within your complete weather station code.
 
 ---hints---
 ---hint---

@@ -20,7 +20,7 @@ As usual, there is more than one way to do this this. You could design a layout 
 
 ![](https://upload.wikimedia.org/wikipedia/commons/5/50/VEROBOARD_sample.jpg)
 
-Soldering stripboard connections can be trickier than the 'through-hole' type you may be familiar with from assembling other digital making kits. However, prototyping HATs for Raspberry Pi are also available and these have plated through hole (PTH) connections that are much easier tow work with.
+Soldering stripboard connections can be trickier than the 'through-hole' type you may be familiar with from assembling other digital making kits. However, prototyping HATs for Raspberry Pi are also available and these have plated through hole (PTH) connections that are much easier two work with.
 
 The circuit diagram below shows a possible design for a weather station HAT using the Adafruit Perma-Proto HAT Kit. You can lay things out differently if you have used alternative components.
 
