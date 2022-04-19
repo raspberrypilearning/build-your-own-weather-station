@@ -21,7 +21,7 @@ Some other breakout boards may have other pins (such as SDO or CSB), but those a
 
 [[[rpi-gui-idle-opening]]]
 
-- Create a new Python file, save it as `/home/pi/weather-station/bme280_sensor.py`, and add the following code to it:
+- Create a new Python file, save it as `/home/username/weather-station/bme280_sensor.py`. Replace `username` with your username on your Raspberry Pi, and add the following code to it:
 
 ```python
 import bme280
