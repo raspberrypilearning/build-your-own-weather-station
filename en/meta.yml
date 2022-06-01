@@ -1,7 +1,8 @@
+---
 title: Build your own weather station
 hero_image: images/banner.png
 description: Create a weather station to collect meteorological data
-theme: red # possible values: blue, green, navy, orange, red, turquoise, violet, yellow
+theme: red
 duration: 3
 listed: true
 ingredient: false
@@ -19,6 +20,8 @@ steps:
 - title: What you will need
 - title: Humidity and temperature
 - title: Air quality
+  completion:
+  - engaged
 - title: Active mechanical sensors
 - title: Wind speed
 - title: Wind gusts
@@ -27,4 +30,6 @@ steps:
 - title: Fully functional weather station
 - title: Assembling everything for outdoors
 - title: Keeping your weather station dry
-- title: "Challenge: add custom sensors"
+  completion:
+  - internal
+- title: 'Challenge: add custom sensors'
