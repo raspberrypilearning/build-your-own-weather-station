@@ -18,9 +18,10 @@ last_tested: 2017-01-01
 steps:
 - title: Introduction
 - title: What you will need
-  completion: engaged
 - title: Humidity and temperature
 - title: Air quality
+  completion:
+  - engaged
 - title: Active mechanical sensors
 - title: Wind speed
 - title: Wind gusts
@@ -29,5 +30,6 @@ steps:
 - title: Fully functional weather station
 - title: Assembling everything for outdoors
 - title: Keeping your weather station dry
-  completion: internal
+  completion:
+  - internal
 - title: 'Challenge: add custom sensors'
