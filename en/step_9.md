@@ -30,7 +30,7 @@ The Oracle Weather Station rain gauge is connected to **GPIO pin 6** (BCM), so f
 
 ![](images/rainfall_bb.png)
 
-- Using the code you wrote for the anemometer as a starting point, write a program called `/home/pi/weather-station/rainfall.py` to detect when the rain gauge bucket has tipped. It should print our a running count of how many bucket tips have occurred.
+- Using the code you wrote for the anemometer as a starting point, write a program called `/home/pi/weather-station/rainfall.py` to detect when the rain gauge bucket has tipped. It should print out a running count of how many bucket tips have occurred.
 
 ---hints---
 ---hint---
