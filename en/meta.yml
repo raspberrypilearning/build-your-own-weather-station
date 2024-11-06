@@ -4,7 +4,7 @@ hero_image: images/banner.png
 description: Create a weather station to collect meteorological data
 theme: red
 duration: 3
-listed: true
+listed: false
 ingredient: false
 copyedit: true
 curriculum: 0, design-0, programming-0, phys-comp-0, manufacture-0, community-0
